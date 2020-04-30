@@ -1,0 +1,42 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+    {{ request.build_absolute_uri }}
+    <br><br><br>
+
+    <form action="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" method="get">
+        <label for="instagram">Instagram:</label>
+        <input type="text" id="instagram" name="instagram__icontains">
+        <label for="phone">Телефон:</label>
+        <input type="text" id="phone" name="phone__icontains">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name__icontains">
+        <label for="city">Город:</label>
+        <input type="text" id="city" name="city__icontains">
+        <label>Оплачено:</label>
+        <input type="radio" name="is_payed" value="true">
+        <input type="radio" name="is_payed" value="false">
+        <label>Отправлено:</label>
+        <input type="radio" name="is_sent" value="true">
+        <input type="radio" name="is_sent" value="false">
+        <label for="min_date_created">Создано с:</label>
+        <input type="date" id="min_date_created" name="min_date_created">
+        <label for="max_date_created">Создано по:</label>
+        <input type="date" id="max_date_created" name="max_date_created">
+        <label for="min_date_planed">К отправке с:</label>
+        <input type="date" id="min_date_planed" name="min_date_planed">
+        <label for="max_date_planed">К отправке по:</label>
+        <input type="date" id="max_date_planed" name="max_date_planed">
+        <label for="min_date_deadline">Дата праздника с:</label>
+        <input type="date" id="min_date_deadline" name="min_date_deadline">
+        <label for="max_date_deadline">Дата праздника по:</label>
+        <input type="date" id="max_date_deadline" name="max_date_deadline">
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+    </form>
+
+    <br><br><br>
+
+    <br><br><br>
+    {{ json }}
+{% endblock %}

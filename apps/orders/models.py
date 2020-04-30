@@ -7,7 +7,7 @@ class Order(models.Model):
     date_planed = models.DateField()  # planned date of sending the order
     date_deadline = models.DateField()  # customer deadline
     instagram = models.CharField(max_length=20)  # client instagram id
-    phone = models.IntegerField()  # TODO Is it correct type for Phone Number?
+    phone = models.IntegerField()
     name = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
     np_department = models.IntegerField()  # NovaPoshta department number

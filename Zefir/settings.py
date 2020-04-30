@@ -39,11 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.frontend',
     'apps.orders',
     'apps.products',
     'apps.materials',
     'apps.catalog',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.TemplateHTMLRenderer',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,6 +90,13 @@ WSGI_APPLICATION = 'Zefir.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {}  # Changed in local settings
+# For cyrillic case insensitive search support:
+# CREATE DATABASE name
+# WITH OWNER name
+# ENCODING 'UTF8'
+# LC_COLLATE = 'ru_RU.UTF-8'
+# LC_CTYPE = 'ru_RU.UTF-8'
+# TEMPLATE = template0;
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
