@@ -1,42 +1,133 @@
 {% extends 'frontend/base.html' %}
 
+{% block collapse_button %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">Фильтры</a>
+            </li>
+        </ul>
+{% endblock %}
+
+{% block collapse_body %}
+    <div class="collapse" id="collapseFilters">
+
+        <form action="{{ request.path }}" method="get">
+
+            <div class="row align-items-center">
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Instagram" name="instagram__icontains" value={{request.GET.instagram__icontains}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Телефон" name="phone__icontains" value={{request.GET.phone__icontains}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="ФИО" name="name__icontains" value={{request.GET.name__icontains}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Город" name="city__icontains" value={{request.GET.city__icontains}}>
+                </div>
+
+                <div class="col-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">Оплачено:</label>
+                        <input class="form-check-input" type="radio" id="is_payed_true" name="is_payed" value="true">
+                        <label class="form-check-label" for="is_payed_true">
+                            Да
+                        </label>
+                        <input class="form-check-input" type="radio" id="is_payed_false" name="is_payed" value="false">
+                        <label class="form-check-label" for="is_payed_false">
+                            Нет
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">Отправлено:</label>
+                        <input class="form-check-input" type="radio" id="is_sent_true" name="is_sent" value="true">
+                        <label class="form-check-label" for="is_sent_true">
+                            Да
+                        </label>
+                        <input class="form-check-input" type="radio" id="is_sent_false" name="is_sent" value="false">
+                        <label class="form-check-label" for="is_sent_false">
+                            Нет
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Заказ c" name="min_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_created}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Заказ по" name="max_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_created}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Отправка с" name="min_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_planed}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Отправка по" name="max_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_planed}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Праздник с" name="min_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_deadline}}>
+                </div>
+
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Праздник по" name="max_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_deadline}}>
+                </div>
+
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+        <a class="btn btn-primary" href="{{ request.path }}" role="button">Сброс фильтров</a>
+    </div>
+{% endblock %}
+
 {% block content %}
-    {{ request.build_absolute_uri }}
-    <br><br><br>
-
-    <form action="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" method="get">
-        <label for="instagram">Instagram:</label>
-        <input type="text" id="instagram" name="instagram__icontains">
-        <label for="phone">Телефон:</label>
-        <input type="text" id="phone" name="phone__icontains">
-        <label for="name">Имя:</label>
-        <input type="text" id="name" name="name__icontains">
-        <label for="city">Город:</label>
-        <input type="text" id="city" name="city__icontains">
-        <label>Оплачено:</label>
-        <input type="radio" name="is_payed" value="true">
-        <input type="radio" name="is_payed" value="false">
-        <label>Отправлено:</label>
-        <input type="radio" name="is_sent" value="true">
-        <input type="radio" name="is_sent" value="false">
-        <label for="min_date_created">Создано с:</label>
-        <input type="date" id="min_date_created" name="min_date_created">
-        <label for="max_date_created">Создано по:</label>
-        <input type="date" id="max_date_created" name="max_date_created">
-        <label for="min_date_planed">К отправке с:</label>
-        <input type="date" id="min_date_planed" name="min_date_planed">
-        <label for="max_date_planed">К отправке по:</label>
-        <input type="date" id="max_date_planed" name="max_date_planed">
-        <label for="min_date_deadline">Дата праздника с:</label>
-        <input type="date" id="min_date_deadline" name="min_date_deadline">
-        <label for="max_date_deadline">Дата праздника по:</label>
-        <input type="date" id="max_date_deadline" name="max_date_deadline">
-        <input type="reset" value="Reset">
-        <input type="submit" value="Submit">
-    </form>
-
-    <br><br><br>
-
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Instagram</th>
+          <th scope="col">Имя</th>
+          <th scope="col">Город</th>
+          <th scope="col">Отправка</th>
+          <th scope="col">Праздник</th>
+          <th scope="col">Оплачено</th>
+          <th scope="col">Отправлено</th>
+          <th scope="col">Заказ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in json.results %}
+        <tr>
+          <th scope="row">Кнопа</th>
+          <td>{{i.instagram}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.city}}</td>
+          <td>{{i.date_planed}}</td>
+          <td>{{i.date_deadline}}</td>
+          <td class="bg-success">{{i.is_payed}}</td>
+          <td>{{i.is_sent}}</td>
+          <td>
+            {% for j in i.orderitems %}
+              {{j}}<br>
+            {% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
     <br><br><br>
     {{ json }}
 {% endblock %}
