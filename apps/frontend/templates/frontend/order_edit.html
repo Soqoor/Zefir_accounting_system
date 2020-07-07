@@ -1,0 +1,42 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+
+            <form action="/orders/{{json.order.id}}/api/" method="POST">{% csrf_token %}
+                <p>
+                    <input type="date" class="form-control" name="date_planed" value={{json.order.date_planed}}>
+                </p>
+                <p><input type="submit" value="Отправить"></p>
+            </form>
+
+            Заказ создан {{ json.order.date_created }}<br>
+            Плановая дата отправки {{ json.order.date_planed }}<br>
+            Дата праздника {{ json.order.date_deadline }}<br>
+            Instagram {{ json.order.instagram }}<br>
+            Телефон {{ json.order.phone }}<br>
+            ФИО {{ json.order.name }}<br>
+            Город {{ json.order.city }}<br>
+            Отделение НП {{ json.order.np_department }}<br>
+            Дата оплаты {{ json.order.date_payed }}<br>
+            Дата отправки {{ json.order.date_sent }}<br>
+        </div>
+        <div class="col-4">
+            {% for i in json.items %}
+                {{ i.product }}
+                {{ i.description }}
+                {{ i.amount }}
+                {{ i.price }}
+                {{ i.is_ready }}<br>
+            {% endfor %}
+        </div>
+        <div class="col-4">
+          Form
+        </div>
+    </div>
+</div>
+
+{% endblock %}

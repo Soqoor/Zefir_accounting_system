@@ -48,7 +48,6 @@ class OrderItemView(ListCreateAPIView):
     serializer_class = OrderItemSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['order']
-    pagination_class = StandardResultsSetPagination
 
 
 class SingleOrderItemViev(RetrieveUpdateDestroyAPIView):

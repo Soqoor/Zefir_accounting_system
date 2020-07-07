@@ -13,76 +13,79 @@
 
         <form action="{{ request.path }}" method="get">
 
-            <div class="row align-items-center">
+            <div class="container">
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Instagram" name="instagram__icontains" value={{request.GET.instagram__icontains}}>
-                </div>
+                <div class="row align-items-center">
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Телефон" name="phone__icontains" value={{request.GET.phone__icontains}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Instagram" name="instagram__icontains" value={{request.GET.instagram__icontains}}>
+                    </div>
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="ФИО" name="name__icontains" value={{request.GET.name__icontains}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Телефон" name="phone__icontains" value={{request.GET.phone__icontains}}>
+                    </div>
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Город" name="city__icontains" value={{request.GET.city__icontains}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="ФИО" name="name__icontains" value={{request.GET.name__icontains}}>
+                    </div>
 
-                <div class="col-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">Оплачено:</label>
-                        <input class="form-check-input" type="radio" id="is_payed_true" name="is_payed" value="true">
-                        <label class="form-check-label" for="is_payed_true">
-                            Да
-                        </label>
-                        <input class="form-check-input" type="radio" id="is_payed_false" name="is_payed" value="false">
-                        <label class="form-check-label" for="is_payed_false">
-                            Нет
-                        </label>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Город" name="city__icontains" value={{request.GET.city__icontains}}>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">Оплачено:</label>
+                            <input class="form-check-input" type="radio" id="is_payed_true" name="is_payed" value="true">
+                            <label class="form-check-label" for="is_payed_true">
+                                Да
+                            </label>
+                            <input class="form-check-input" type="radio" id="is_payed_false" name="is_payed" value="false">
+                            <label class="form-check-label" for="is_payed_false">
+                                Нет
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">Отправлено:</label>
+                            <input class="form-check-input" type="radio" id="is_sent_true" name="is_sent" value="true">
+                            <label class="form-check-label" for="is_sent_true">
+                                Да
+                            </label>
+                            <input class="form-check-input" type="radio" id="is_sent_false" name="is_sent" value="false">
+                            <label class="form-check-label" for="is_sent_false">
+                                Нет
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <div class="row align-items-center">
 
-                <div class="col-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">Отправлено:</label>
-                        <input class="form-check-input" type="radio" id="is_sent_true" name="is_sent" value="true">
-                        <label class="form-check-label" for="is_sent_true">
-                            Да
-                        </label>
-                        <input class="form-check-input" type="radio" id="is_sent_false" name="is_sent" value="false">
-                        <label class="form-check-label" for="is_sent_false">
-                            Нет
-                        </label>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Заказ c" name="min_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_created}}>
                     </div>
-                </div>
-            </div>
-            <div class="row align-items-center">
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Заказ c" name="min_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_created}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Заказ по" name="max_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_created}}>
+                    </div>
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Заказ по" name="max_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_created}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Отправка с" name="min_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_planed}}>
+                    </div>
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Отправка с" name="min_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_planed}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Отправка по" name="max_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_planed}}>
+                    </div>
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Отправка по" name="max_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_planed}}>
-                </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Праздник с" name="min_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_deadline}}>
+                    </div>
 
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Праздник с" name="min_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_deadline}}>
-                </div>
-
-                <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Праздник по" name="max_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_deadline}}>
+                    <div class="col-2">
+                        <input type="text" class="form-control" placeholder="Праздник по" name="max_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_deadline}}>
+                    </div>
                 </div>
 
             </div>
@@ -111,8 +114,8 @@
       <tbody>
         {% for i in json.results %}
         <tr>
-          <th scope="row">Кнопа</th>
-          <td>{{i.instagram}}</td>
+          <td><a class="btn btn-secondary" href="/orders/{{i.id}}">Edit</a></td>
+          <td><a class="btn btn-outline-secondary" href="/orders/{{i.id}}">{{i.instagram}}</a></td>
           <td>{{i.name}}</td>
           <td>{{i.city}}</td>
           <td>{{i.date_planed}}</td>

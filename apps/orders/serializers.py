@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 from .models import Order, OrderItem
+from ..products.serializers import ProductSerializer
 
 
 class OrderSerializer(ModelSerializer):
@@ -26,6 +27,8 @@ class OrderSerializer(ModelSerializer):
 
 
 class OrderItemSerializer(ModelSerializer):
+    product = ProductSerializer(many=False, read_only=True)
+
     class Meta:
         model = OrderItem
         fields = (
