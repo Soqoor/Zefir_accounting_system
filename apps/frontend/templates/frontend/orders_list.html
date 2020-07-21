@@ -1,9 +1,26 @@
 {% extends 'frontend/base.html' %}
 
-{% block collapse_button %}
+{% load static %}
+
+{% block nav_bar_addition %}
         <ul class="navbar-nav">
+            <li>
+                <a id='btn_forgotten' class="nav-link text-danger" href="#">Просроченные</a>
+            </li>
+            <li>
+                <a id='btn_today' class="nav-link" href="#">Сегодня</a>
+            </li>
+            <li>
+                <a id='btn_tomorrow' class="nav-link" href="#">Завтра</a>
+            </li>
+            <li>
+                <a id='btn_after_tomorrow' class="nav-link" href="#">Послезавтра</a>
+            </li>
+            <li>
+                <a id='btn_all' class="nav-link" href="#">Все заказы</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">Фильтры</a>
+                <a id='btn_filters' class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">Фильтры</a>
             </li>
         </ul>
 {% endblock %}
@@ -97,40 +114,32 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table">
+    <div id="pagination_bar">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a id="btn_prev" class="page-link" href="#">Previous</a></li>
+            <li class="page-item disabled"><a id="pagination_text_field" class="page-link" href="#">1</a></li>
+            <li class="page-item"><a id="btn_next" class="page-link" href="#">Next</a></li>
+        </ul>
+    </div>
+
+    <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Instagram</th>
           <th scope="col">Имя</th>
           <th scope="col">Город</th>
           <th scope="col">Отправка</th>
           <th scope="col">Праздник</th>
-          <th scope="col">Оплачено</th>
-          <th scope="col">Отправлено</th>
+          <th scope="col">Оплата</th>
           <th scope="col">Заказ</th>
         </tr>
       </thead>
-      <tbody>
-        {% for i in json.results %}
-        <tr>
-          <td><a class="btn btn-secondary" href="/orders/{{i.id}}">Edit</a></td>
-          <td><a class="btn btn-outline-secondary" href="/orders/{{i.id}}">{{i.instagram}}</a></td>
-          <td>{{i.name}}</td>
-          <td>{{i.city}}</td>
-          <td>{{i.date_planed}}</td>
-          <td>{{i.date_deadline}}</td>
-          <td class="bg-success">{{i.is_payed}}</td>
-          <td>{{i.is_sent}}</td>
-          <td>
-            {% for j in i.orderitems %}
-              {{j}}<br>
-            {% endfor %}
-          </td>
-        </tr>
-        {% endfor %}
+      <tbody class="table_body">
+
       </tbody>
     </table>
-    <br><br><br>
-    {{ json }}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'frontend/js/orders_list_script.js' %}"></script>
 {% endblock %}

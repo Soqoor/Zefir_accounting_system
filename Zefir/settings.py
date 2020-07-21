@@ -52,7 +52,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.TemplateHTMLRenderer',
-    ]
+    ],
+    'DATE_FORMAT': '%d.%m.%y',
+    'DATE_INPUT_FORMATS' : ['iso-8601', '%d.%m.%y']
 }
 
 MIDDLEWARE = [
@@ -89,7 +91,12 @@ WSGI_APPLICATION = 'Zefir.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {}  # Changed in local settings
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+} # Changed in local settings
 # For cyrillic case insensitive search support:
 # CREATE DATABASE name
 # WITH OWNER name

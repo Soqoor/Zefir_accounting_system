@@ -1,6 +1,15 @@
 {% extends 'frontend/base.html' %}
 
+{% load static %}
+
 {% block content %}
-    {{ request.build_absolute_uri }}
-    <br><br><br>
+    <div class="main_page_body">
+        {{ request.build_absolute_uri }}
+        <br><br><br>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'frontend/js/main_page_script.js' %}"></script>
 {% endblock %}
