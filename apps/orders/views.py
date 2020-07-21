@@ -1,14 +1,9 @@
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet, DateFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.pagination import PageNumberPagination
 from .serializers import OrderSerializer, OrderItemSerializer
 from .models import Order, OrderItem
 
 
-class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 2
-    page_size_query_param = 'page_size'
-    max_page_size = 100
 
 
 class OrderFilter(FilterSet):
@@ -35,7 +30,6 @@ class OrderView(ListCreateAPIView):
     queryset = Order.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = OrderFilter
-    pagination_class = StandardResultsSetPagination
 
 
 class SingleOrderView(RetrieveUpdateDestroyAPIView):
