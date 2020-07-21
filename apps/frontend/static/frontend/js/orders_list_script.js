@@ -149,20 +149,14 @@ function rebuildOrders (data) {
         document.querySelector('.table_body').append(row);
     });
 
-    if (!data.next && !data.previous) {
+    btn_next.classList.remove('collapse');
+    btn_prev.classList.remove('collapse');
+    if (!data.next) {btn_next.classList.add('collapse');}
+    if (!data.previous) {btn_prev.classList.add('collapse');}
+    btn_prev.link = data.previous;
+    btn_next.link = data.next;
+    pagination_text_field.textContent = `Страница ${data.page} из ${data.pages}`;
 
-        pagination_bar.classList.add('collapse');
-
-    } else {
-
-        pagination_bar.classList.remove('collapse');
-        btn_prev.link = data.previous;
-        btn_next.link = data.next;
-        pagination_text_field.textContent = `${btn_next.link ? btn_next.link.slice(-1)-1 : Math.ceil(data.count/data.results.length)} 
-                                            from 
-                                            ${Math.ceil(data.count/data.results.length)}`;
-
-    }
 
 }
 

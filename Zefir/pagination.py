@@ -11,12 +11,27 @@ class CustomPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
 
     def get_paginated_response(self, data):
+
+        next = self.get_next_link()
+        previous = self.get_previous_link()
+        total = self.page.paginator.count
+        page = int(self.request.GET.get('page', DEFAULT_PAGE)) # can not set default = self.page
+        pages = self.page.paginator.num_pages
+        page_size = int(self.request.GET.get('page_size', self.page_size))
+        items_from = (page-1) * page_size + 1
+        if next:
+            items_to = page * page_size
+        else:
+            items_to = total
+
         return Response({
-            'next': self.get_next_link(),
-            'previous': self.get_previous_link(),
-            'total': self.page.paginator.count,
-            'page': int(self.request.GET.get('page', DEFAULT_PAGE)), # can not set default = self.page
-            'pages': self.page.paginator.num_pages,
-            'page_size': int(self.request.GET.get('page_size', self.page_size)),
+            'next': next,
+            'previous': previous,
+            'total': total,
+            'page': page, # can not set default = self.page
+            'pages': pages,
+            'page_size': page_size,
+            'items_from': items_from,
+            'items_to': items_to,
             'results': data
         })
