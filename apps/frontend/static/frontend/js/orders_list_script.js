@@ -13,6 +13,8 @@ const btn_today = document.getElementById('btn_today'),
       btn_prev = document.getElementById('btn_prev'),
       btn_next = document.getElementById('btn_next'),
       pagination_text_field = document.getElementById('pagination_text_field'),
+      li_prev = document.getElementById('li_prev'),
+      li_next = document.getElementById('li_next'),
       
       // buttons collections
       buttons_nav = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_filters, btn_forgotten, btn_all],
@@ -122,7 +124,7 @@ function rebuildOrders (data) {
 
         row.innerHTML = `
             <tr>
-                <td colspan="7">Нет записей, удовлетворяющих поиску</td>
+                <td colspan="7">В этом месте сейчас пусто</td>
             </tr>
         `;
         document.querySelector('.table_body').append(row);
@@ -149,13 +151,15 @@ function rebuildOrders (data) {
         document.querySelector('.table_body').append(row);
     });
 
-    btn_next.classList.remove('collapse');
-    btn_prev.classList.remove('collapse');
-    if (!data.next) {btn_next.classList.add('collapse');}
-    if (!data.previous) {btn_prev.classList.add('collapse');}
+    pagination_bar.classList.remove('collapse');
+    li_next.classList.remove('disabled');
+    li_prev.classList.remove('disabled');
+    if (!data.next && !data.previous) {pagination_bar.classList.add('collapse');}
+    if (!data.next) {li_next.classList.add('disabled');}
+    if (!data.previous) {li_prev.classList.add('disabled');}
     btn_prev.link = data.previous;
     btn_next.link = data.next;
-    pagination_text_field.textContent = `Страница ${data.page} из ${data.pages}`;
+    pagination_text_field.textContent = `${data.page} из ${data.pages}`;
 
 
 }
