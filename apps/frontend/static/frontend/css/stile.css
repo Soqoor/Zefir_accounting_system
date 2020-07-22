@@ -1,0 +1,13 @@
+$bgDefault: #FFFFCC;
+
+.navbar-custom {
+    background-color: $bgDefault;
+}
+
+.bg-custom {
+    background-color: #FFFFCC;
+}
+
+.pagination {
+    margin-bottom: 0;
+}
