@@ -1,12 +1,12 @@
 'use strict';
 
       // navigation buttons
-const btn_today = document.getElementById('btn_today'),
+const btns_dropdown = document.getElementById('navbarDropdownFilters'),
+      btn_today = document.getElementById('btn_today'),
       btn_tomorrow = document.getElementById('btn_tomorrow'),
       btn_after_tomorrow = document.getElementById('btn_after_tomorrow'),
-      btn_filters = document.getElementById('btn_filters'),
-      btn_forgotten = document.getElementById('btn_forgotten'),
       btn_all = document.getElementById('btn_all'),
+      btn_forgotten = document.getElementById('btn_forgotten'),
       
       // pagination bar
       pagination_bar = document.getElementById('pagination_bar'),
@@ -17,15 +17,9 @@ const btn_today = document.getElementById('btn_today'),
       li_next = document.getElementById('li_next'),
       
       // buttons collections
-      buttons_nav = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_filters, btn_forgotten, btn_all],
-      buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_filters, btn_forgotten, btn_all, btn_prev, btn_next];
+      nav_buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all],
+      buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all, btn_prev, btn_next];
 
-// links for nav buttons
-// const today_link = `/orders/api?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`,
-//       tomorrow_link = `/orders/api?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`,
-//       after_tomorrow_link = `/orders/api?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`,
-//       forgotten_link = `/orders/api?is_sent=false&max_date_planed=${isoDateFromToday(-1)}`,
-//       all_link = `/orders/api`;
 btn_today.link = `/orders/api?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
 btn_tomorrow.link = `/orders/api?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
 btn_after_tomorrow.link = `/orders/api?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
@@ -35,22 +29,12 @@ btn_prev.link = '#';
 btn_next.link = '#';
 
 
-// let prev_link = '#',
-//     next_link = '#',
-//     pagination_text = '#';
-
-// set onclick events for nav buttons
-// activateButton(today_link, btn_today, buttons);
-// activateButton(tomorrow_link, btn_tomorrow, buttons);
-// activateButton(after_tomorrow_link, btn_after_tomorrow, buttons);
-// activateButton(forgotten_link, btn_forgotten, buttons);
-// activateButton(all_link, btn_all, buttons);
 buttons.forEach(function(btn){
     btn.addEventListener('click', setButtonEvent);
 });
 
-buttons_nav.forEach(function(btn){
-    btn.addEventListener('click', changeButtonActiveState);
+nav_buttons.forEach(function(btn){
+    btn.addEventListener('click', setDropdownTitle);
 });
 
 // Fill page on load
@@ -58,11 +42,14 @@ reloadOrders(btn_forgotten.link)
 .then(data => {
     if (data.count == 0) {
         btn_forgotten.classList.add('collapse');
-        btn_today.classList.add('active');
         reloadOrders(btn_today.link)
         .then(data => rebuildOrders(data));
+        btns_dropdown.textContent = 'Сегодня';
     }
-    else rebuildOrders(data);
+    else {
+        rebuildOrders(data);
+        btns_dropdown.textContent = 'Просроченные';
+    }
 });
 
 function isoDateFromToday(number) {
@@ -82,26 +69,8 @@ function setButtonEvent (e) {
     e.currentTarget.blur();
 }
 
-function changeButtonActiveState (e) {
-    switchButton(e.currentTarget, buttons_nav);
-}
-
-// function activateButton(url, button, buttons=[]) {
-//     button.addEventListener('click', () => {
-//         if (buttons) switchButton(button, buttons);
-//         reloadOrders(url)
-//         .then(data => rebuildOrders(data));
-//     });
-// }
-
-function switchButton(button, buttons) {
-    buttons.forEach(function(item) {
-        item.classList.remove('active');
-        if (item == button) {
-            item.classList.add('active');
-            item.blur();
-        }
-    });
+function setDropdownTitle (e) {
+    btns_dropdown.textContent = e.currentTarget.textContent;
 }
 
 async function reloadOrders (url) {
@@ -132,6 +101,13 @@ function rebuildOrders (data) {
 
     data.results.forEach (({instagram, name, city, date_planed, date_deadline, is_payed, is_sent, orderitems}) => {
         const row = document.createElement('tr');
+
+        let orderitems_text = "";
+        orderitems.forEach(function(item){
+            if (orderitems_text) orderitems_text += ' ';
+            orderitems_text += item;
+        });
+        console.log(orderitems_text);
         
         if (is_sent) row.classList.add("table-success");
         if (date_planed < Date.now && !is_sent) row.classList.add("table-danger");
@@ -144,7 +120,7 @@ function rebuildOrders (data) {
                 <td>${date_planed}</td>
                 <td>${date_deadline}</td>
                 ${is_payed ? '<td class="text-success">Да</td>' : '<td class="text-danger">Нет</td>'}
-                <td>${orderitems}</td>
+                <td>${orderitems_text}</td>
             </tr>
         `;
 

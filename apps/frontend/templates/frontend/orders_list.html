@@ -22,115 +22,24 @@
 </div>
 
 <ul class="navbar-nav">
-    <li>
-        <a id='btn_forgotten' class="nav-link text-danger" href="#">Просроченные</a>
+   
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFilters" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Сегодня
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownFilters">
+          <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
+          <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
+          <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
+          <div class="dropdown-divider"></div>
+          <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
+          <div class="dropdown-divider"></div>
+          <a id="btn_forgotten" class="dropdown-item text-danger" href="#">Просроченные</a>
+        </div>
     </li>
-    <li>
-        <a id='btn_today' class="nav-link" href="#">Сегодня</a>
-    </li>
-    <li>
-        <a id='btn_tomorrow' class="nav-link" href="#">Завтра</a>
-    </li>
-    <li>
-        <a id='btn_after_tomorrow' class="nav-link" href="#">Послезавтра</a>
-    </li>
-    <li>
-        <a id='btn_all' class="nav-link" href="#">Все заказы</a>
-    </li>
-    <li class="nav-item">
-        <a id='btn_filters' class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">Фильтры</a>
-    </li>
-</ul>
 
 {% endblock %}
 
-{% block collapse_body %}
-    <div class="collapse" id="collapseFilters">
-
-        <form action="#" method="get">
-
-            <div class="container">
-
-                <div class="row align-items-center">
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Instagram" name="instagram__icontains" value={{request.GET.instagram__icontains}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Телефон" name="phone__icontains" value={{request.GET.phone__icontains}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="ФИО" name="name__icontains" value={{request.GET.name__icontains}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Город" name="city__icontains" value={{request.GET.city__icontains}}>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">Оплачено:</label>
-                            <input class="form-check-input" type="radio" id="is_payed_true" name="is_payed" value="true">
-                            <label class="form-check-label" for="is_payed_true">
-                                Да
-                            </label>
-                            <input class="form-check-input" type="radio" id="is_payed_false" name="is_payed" value="false">
-                            <label class="form-check-label" for="is_payed_false">
-                                Нет
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">Отправлено:</label>
-                            <input class="form-check-input" type="radio" id="is_sent_true" name="is_sent" value="true">
-                            <label class="form-check-label" for="is_sent_true">
-                                Да
-                            </label>
-                            <input class="form-check-input" type="radio" id="is_sent_false" name="is_sent" value="false">
-                            <label class="form-check-label" for="is_sent_false">
-                                Нет
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center">
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Заказ c" name="min_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_created}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Заказ по" name="max_date_created" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_created}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Отправка с" name="min_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_planed}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Отправка по" name="max_date_planed" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_planed}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Праздник с" name="min_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.min_date_deadline}}>
-                    </div>
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" placeholder="Праздник по" name="max_date_deadline" onfocus="(this.type='date')" onblur="(this.type='text')" value={{request.GET.max_date_deadline}}>
-                    </div>
-                </div>
-
-            </div>
-
-            <input type="submit" value="Submit">
-        </form>
-        <a class="btn btn-primary" href="{{ request.path }}" role="button">Сброс фильтров</a>
-    </div>
-{% endblock %}
 
 {% block content %}
 
