@@ -20,6 +20,7 @@ const btns_dropdown = document.getElementById('navbarDropdownFilters'),
       nav_buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all],
       buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all, btn_prev, btn_next];
 
+// set default links for buttons
 btn_today.link = `/orders/api?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
 btn_tomorrow.link = `/orders/api?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
 btn_after_tomorrow.link = `/orders/api?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
@@ -28,32 +29,42 @@ btn_all.link = `/orders/api`;
 btn_prev.link = '#';
 btn_next.link = '#';
 
-
+// ONLOAD
+// set events to reload new data
 buttons.forEach(function(btn){
     btn.addEventListener('click', setButtonEvent);
 });
 
+// set events to change dropdown title
 nav_buttons.forEach(function(btn){
     btn.addEventListener('click', setDropdownTitle);
 });
 
-// Fill page on load
-reloadOrders(btn_forgotten.link)
-.then(data => {
-    if (data.count == 0) {
-        btn_forgotten.classList.add('collapse');
-        reloadOrders(btn_today.link)
-        .then(data => rebuildOrders(data));
-        btns_dropdown.textContent = 'Сегодня';
-    }
-    else {
+// reload page last stanse
+if (sessionStorage.getItem('last_used_button')) {
+    btns_dropdown.textContent = sessionStorage.getItem('last_used_button');
+    reloadOrders(sessionStorage.getItem('last_used_url'))
+    .then(data => {
         rebuildOrders(data);
-        btns_dropdown.textContent = 'Просроченные';
-    }
-});
+    });
+} else { // or load default page
+    reloadOrders(btn_forgotten.link)
+    .then(data => {
+        if (data.count == 0) {
+            btn_forgotten.classList.add('collapse');
+            sessionStorage.setItem('btn_forgotten_collapse', true);
+            reloadOrders(btn_today.link)
+            .then(data => rebuildOrders(data));
+            btns_dropdown.textContent = 'Сегодня';
+        } else {
+            rebuildOrders(data);
+            btns_dropdown.textContent = 'Просроченные';
+        }
+    });
+}
 
+// returns ISO date + number days from today
 function isoDateFromToday(number) {
-    // returns ISO date + number days from today
     let target_day = new Date();
     target_day.setDate(target_day.getDate() + number);
     target_day.setHours(target_day.getHours() - target_day.getTimezoneOffset()/60);
@@ -71,6 +82,7 @@ function setButtonEvent (e) {
 
 function setDropdownTitle (e) {
     btns_dropdown.textContent = e.currentTarget.textContent;
+    sessionStorage.setItem('last_used_button', e.currentTarget.textContent);
 }
 
 async function reloadOrders (url) {
@@ -79,6 +91,8 @@ async function reloadOrders (url) {
     if (!res.ok) {
         throw new Error (`Could not fetch ${url}, status ${res.status}`);
     }
+
+    sessionStorage.setItem('last_used_url', url);
 
     return await res.json();
 }
@@ -99,7 +113,7 @@ function rebuildOrders (data) {
         document.querySelector('.table_body').append(row);
     }
 
-    data.results.forEach (({instagram, name, city, date_planed, date_deadline, is_payed, is_sent, orderitems}) => {
+    data.results.forEach (({id, instagram, name, city, date_planed, date_deadline, is_payed, is_sent, orderitems}) => {
         const row = document.createElement('tr');
 
         let orderitems_text = "";
@@ -107,7 +121,6 @@ function rebuildOrders (data) {
             if (orderitems_text) orderitems_text += ' ';
             orderitems_text += item;
         });
-        console.log(orderitems_text);
         
         if (is_sent) row.classList.add("table-success");
         if (date_planed < Date.now && !is_sent) row.classList.add("table-danger");
@@ -124,6 +137,10 @@ function rebuildOrders (data) {
             </tr>
         `;
 
+        row.addEventListener('click', () => {
+            window.open(`${id}/`, '_parent');
+        });
+
         document.querySelector('.table_body').append(row);
     });
 
@@ -139,4 +156,3 @@ function rebuildOrders (data) {
 
 
 }
-
