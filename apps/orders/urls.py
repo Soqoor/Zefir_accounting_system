@@ -3,8 +3,8 @@ from .views import OrderView, SingleOrderView, OrderItemView, SingleOrderItemVie
 
 app_name = 'orders'
 urlpatterns = [
-    path('orders/api/', OrderView.as_view()),
-    path('orders/<int:pk>/api/', SingleOrderView.as_view(), name='order_detail'),
-    path('items/api/', OrderItemView.as_view()),
-    path('items/<int:pk>/api/', SingleOrderItemViev.as_view()),
+    path('orders/', OrderView.as_view()),
+    path('orders/<int:pk>/', SingleOrderView.as_view(), name='order_detail'),
+    path('items/', OrderItemView.as_view()),
+    path('items/<int:pk>/', SingleOrderItemViev.as_view()),
 ]
