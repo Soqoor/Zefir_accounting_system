@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet, DateFilter
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .serializers import OrderSerializer, OrderItemSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.pagination import PageNumberPagination
+from .serializers import OrderSerializer, OrderItemSerializer, ClientSerializer
 from .models import Order, OrderItem
 
 
@@ -25,6 +26,13 @@ class OrderFilter(FilterSet):
                   }
 
 
+class ClientFilter(FilterSet):
+
+    class Meta:
+        model = Order
+        fields = {'instagram': ['icontains']}
+
+
 class OrderView(ListCreateAPIView):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
@@ -47,3 +55,15 @@ class OrderItemView(ListCreateAPIView):
 class SingleOrderItemViev(RetrieveUpdateDestroyAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+
+class ClientPagination(PageNumberPagination):
+    page_size = 10
+
+
+class Client(ListAPIView):
+    queryset = Order.objects.all()
+    serializer_class = ClientSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ClientFilter
+    pagination_class = ClientPagination
