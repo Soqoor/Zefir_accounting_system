@@ -53,7 +53,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.TemplateHTMLRenderer',
     ],
-    'DATE_FORMAT': '%d.%m.%y',
+    'DATE_FORMAT': 'iso-8601',
     'DATE_INPUT_FORMATS' : ['iso-8601', '%d.%m.%y'],
     'DEFAULT_PAGINATION_CLASS':    
          'Zefir.pagination.CustomPagination'

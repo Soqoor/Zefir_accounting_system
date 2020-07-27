@@ -11,4 +11,4 @@ def orders_request(request):
 
 
 def order_edit(request, pk):
-    return render(request, 'frontend/order_edit.html')
+    return render(request, 'frontend/order_edit.html', {'pk': pk})

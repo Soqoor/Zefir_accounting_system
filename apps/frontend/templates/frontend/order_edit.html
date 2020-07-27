@@ -1,42 +1,89 @@
 {% extends 'frontend/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-4">
+<h1>
+    Заказ номер <span id='pk'>{{ pk }}</span>
+</h1>
 
-            <form action="/orders/{{json.order.id}}/api/" method="POST">{% csrf_token %}
-                <p>
-                    <input type="date" class="form-control" name="date_planed" value={{json.order.date_planed}}>
-                </p>
-                <p><input type="submit" value="Отправить"></p>
-            </form>
+<form>
 
-            Заказ создан {{ json.order.date_created }}<br>
-            Плановая дата отправки {{ json.order.date_planed }}<br>
-            Дата праздника {{ json.order.date_deadline }}<br>
-            Instagram {{ json.order.instagram }}<br>
-            Телефон {{ json.order.phone }}<br>
-            ФИО {{ json.order.name }}<br>
-            Город {{ json.order.city }}<br>
-            Отделение НП {{ json.order.np_department }}<br>
-            Дата оплаты {{ json.order.date_payed }}<br>
-            Дата отправки {{ json.order.date_sent }}<br>
+    <div class="form-group row">
+      <label for="date_created" class="col-sm-2 col-form-label col-form-label-sm">Дата создания заказа</label>
+      <div class="col-sm-2">
+          <input type="date" class="form-control" id="date_created">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="date_planed" class="col-sm-2 col-form-label col-form-label-sm">Дата отправки</label>
+      <div class="col-sm-2">
+          <input type="date" class="form-control" id="date_planed">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="date_deadline" class="col-sm-2 col-form-label col-form-label-sm">Дата праздника</label>
+      <div class="col-sm-2">
+          <input type="date" class="form-control" id="date_deadline">
+      </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="instagram" class="col-sm-2 col-form-label col-form-label-sm">Instagram</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="instagram">
         </div>
-        <div class="col-4">
-            {% for i in json.items %}
-                {{ i.product }}
-                {{ i.description }}
-                {{ i.amount }}
-                {{ i.price }}
-                {{ i.is_ready }}<br>
-            {% endfor %}
+      </div>
+
+    <div class="form-group row">
+        <label for="phone" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="phone">
         </div>
-        <div class="col-4">
-          Form
+      </div>
+
+    <div class="form-group row">
+        <label for="city" class="col-sm-2 col-form-label col-form-label-sm">city</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="city">
+        </div>
+      </div>
+
+    <div class="form-group row">
+        <label for="np_department" class="col-sm-2 col-form-label col-form-label-sm">np_department</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="np_department">
+        </div>
+      </div>
+
+    <div class="form-group row">
+        <label for="date_payed" class="col-sm-2 col-form-label col-form-label-sm">Оплата</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="date_payed" placeholder="Не оплачено">
         </div>
     </div>
-</div>
 
+    <div class="form-group row">
+        <label for="date_sent" class="col-sm-2 col-form-label col-form-label-sm">Отправка</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="date_sent" placeholder="Не отправлено">
+        </div>
+    </div>
+
+
+
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'frontend/js/order_edit_script.js' %}"></script>
 {% endblock %}
