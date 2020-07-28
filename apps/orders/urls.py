@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import OrderView, SingleOrderView, OrderItemView, SingleOrderItemViev
+from .views import OrderView, SingleOrderView, OrderItemView, SingleOrderItemViev, Client
 
 app_name = 'orders'
 urlpatterns = [
@@ -7,4 +7,5 @@ urlpatterns = [
     path('orders/<int:pk>/', SingleOrderView.as_view(), name='order_detail'),
     path('items/', OrderItemView.as_view()),
     path('items/<int:pk>/', SingleOrderItemViev.as_view()),
+    path('clients/', Client.as_view()),
 ]

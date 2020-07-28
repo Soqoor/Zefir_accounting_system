@@ -40,3 +40,16 @@ class OrderItemSerializer(ModelSerializer):
             'price',
             'is_ready',
         )
+
+
+class ClientSerializer(ModelSerializer):
+
+    class Meta:
+        model = Order
+        fields = (
+            'instagram',
+            'phone',
+            'name',
+            'city',
+            'np_department',
+        )
