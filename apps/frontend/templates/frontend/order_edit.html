@@ -4,86 +4,126 @@
 
 {% block content %}
 
-<h1>
-    Заказ номер <span id='pk'>{{ pk }}</span>
-</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-7">
+					<h4>
+						Заказ # {{ pk }}
+					</h4>
+				</div>
 
-<form>
+				<div class="row">
+					<div class="col">
+						<span id="order_ok_alert" class="badge badge-success collapse">Success</span>
+						<!-- <label id="order_ok_alert" type="button" class="btn btn-success btn-sm">Сохранено</label> -->
+					</div>
+				</div>
 
-    <div class="form-group row">
-      <label for="date_created" class="col-sm-2 col-form-label col-form-label-sm">Дата создания заказа</label>
-      <div class="col-sm-2">
-          <input type="date" class="form-control" id="date_created">
-      </div>
-    </div>
+				<div class="col">
+					<button type="button" class="btn btn-outline-danger btn-sm float-right">&#128465;</button>
+				</div>
+			</div>
 
-    <div class="form-group row">
-      <label for="date_planed" class="col-sm-2 col-form-label col-form-label-sm">Дата отправки</label>
-      <div class="col-sm-2">
-          <input type="date" class="form-control" id="date_planed">
-      </div>
-    </div>
+			<form id="order_form"> {% csrf_token %}
+				<div class="row">
 
-    <div class="form-group row">
-      <label for="date_deadline" class="col-sm-2 col-form-label col-form-label-sm">Дата праздника</label>
-      <div class="col-sm-2">
-          <input type="date" class="form-control" id="date_deadline">
-      </div>
-    </div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="date_created">Создан:</label>
+							<input type="date" class="form-control form-control-sm" id="date_created" name="date_created" disabled>
+						</div>
+						<div class="form-group">
+							<label for="date_planed">Отправка:</label>
+							<input type="date" class="form-control form-control-sm" id="date_planed" name="date_planed">
+						</div>
+						<div class="form-group">
+							<label for="date_deadline">Дата праздника:</label>
+							<input type="date" class="form-control form-control-sm" id="date_deadline" name="date_deadline">
+						</div>
+						<div class="form-group">
+							<label for="date_payed">Оплачено:</label> 
+							<input type="text" class="form-control form-control-sm" id="date_payed" name="date_payed" placeholder="Не оплачено">
+						</div>
+						<div class="form-group">
+							<label for="date_sent">Отправлено:</label>
+							<input type="text" class="form-control form-control-sm" id="date_sent" name="date_sent" placeholder="Не отправлено">
+						</div>
+					</div>
 
-    <div class="form-group row">
-        <label for="instagram" class="col-sm-2 col-form-label col-form-label-sm">Instagram</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="instagram">
-        </div>
-      </div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="instagram">Instagram:</label>
+							<input type="text" class="form-control form-control-sm" id="instagram" name="instagram">
+						</div>
+						<div class="form-group">
+							<label for="phone">Телефон:</label>
+							<input type="text" class="tel form-control form-control-sm" id="phone" name="phone">
+						</div>
+						<div class="form-group">
+							<label for="name">ФИО:</label>
+							<input type="text" class="form-control form-control-sm" id="name" name="name">
+						</div>
+						<div class="form-group">
+							<label for="city">Город:</label>
+							<input type="text" class="form-control form-control-sm" id="city" name="city">
+						</div>
+						<div class="form-group">
+							<label for="np_department">Отделение НП:</label>
+							<input type="text" class="form-control form-control-sm" id="np_department" name="np_department">
+						</div>
+					</div>
 
-    <div class="form-group row">
-        <label for="phone" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="phone">
-        </div>
-      </div>
+				</div>
 
-    <div class="form-group row">
-        <label for="city" class="col-sm-2 col-form-label col-form-label-sm">city</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="city">
-        </div>
-      </div>
-
-    <div class="form-group row">
-        <label for="np_department" class="col-sm-2 col-form-label col-form-label-sm">np_department</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="np_department">
-        </div>
-      </div>
-
-    <div class="form-group row">
-        <label for="date_payed" class="col-sm-2 col-form-label col-form-label-sm">Оплата</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="date_payed" placeholder="Не оплачено">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="date_sent" class="col-sm-2 col-form-label col-form-label-sm">Отправка</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="date_sent" placeholder="Не отправлено">
-        </div>
-    </div>
-
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" id="btn_save" class="btn btn-outline-success btn-sm btn-block">Сохранить</button>
+					</div>
+				</div>
 
 
+			</form>
+		</div>
 
+		<div class="col">
+			<div class="row">
+				<div class="col">
+					<h4>
+						Позиции заказа
+					</h4>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-outline-danger btn-sm float-right">&#9473;</button>
+					<button type="button" class="btn btn-outline-success btn-sm float-right">&#9547;</button>
+				</div>
+			</div>
 
+			<table class="table table-hover table-sm">
+				<thead>
+				  <tr>
+					<th scope="col">Категория</th>
+					<th scope="col">Товар</th>
+					<th scope="col">Описание</th>
+					<th scope="col">Шт.</th>
+					<th scope="col">Цена</th>
+					<th scope="col">Сумма</th>
+				  </tr>
+				</thead>
+				<tbody class="table_body">
+		  
+				</tbody>
+			  </table>
+		</div>
+	</div>
+</div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
 
 {% endblock %}
 
 
 {% block script %}
     <script src="{% static 'frontend/js/order_edit_script.js' %}"></script>
+    <script src="{% static 'frontend/js/OE_tel_mask.js' %}"></script>
 {% endblock %}

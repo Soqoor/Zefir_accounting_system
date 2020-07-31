@@ -8,6 +8,12 @@ $bgDefault: #FFFFCC;
     background-color: #FFFFCC;
 }
 
+/* for paginator in nav bar */
 .pagination {
     margin-bottom: 0;
 }
+
+/* for "не оплачено" and "не отправлено" input placeholders */
+.form-control::-webkit-input-placeholder {
+    color: red;
+  }
