@@ -27,6 +27,10 @@ async function patchData (url = '', data = {}) {
         body: data
     });
 
+    if (!res.ok) {
+        throw new Error (`Could not fetch ${url}, status ${res.status}`);
+    }
+
     const status = res.status,
           json = await res.json();
 

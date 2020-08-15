@@ -12,12 +12,12 @@ const input_date_created = document.getElementById('date_created'),
       input_date_sent = document.getElementById('date_sent');
 
 const pathname = window.location.pathname,
-      api_pathname = `/api${pathname}`,
+      order_api_pathname = `/api${pathname}`,
       order_id = +pathname.replace(/\D+/g,"");
 
 
 // reload order on page load
-getData(api_pathname)
+getData(order_api_pathname)
 .then(data => {
     rebuildOrder(data);
 });
@@ -61,13 +61,15 @@ function rebuildOrder (data) {
 function rebuildItems (data) {
     let sum = 0;
     
-    data.results.forEach (({product, description, amount, price, is_ready}) => {
+    data.results.forEach (({id, product, description, amount, price, is_ready}) => {
 
         const row = document.createElement('tr');
 
         sum += price * amount;
         
         if (is_ready) row.classList.add("table-success");
+        row.classList.add('table_row');
+        row.id = id;
 
         row.innerHTML = `
             <tr>
@@ -94,4 +96,7 @@ function rebuildItems (data) {
         </tr>
     `;
     document.querySelector('.table_body').append(row);
+
+    let event = new Event("items_loaded");
+    document.dispatchEvent(event); // trigger for addEventListeners on order items
 }
