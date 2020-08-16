@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", function() {
             if (this.value && this.value.replace(/\D/g, "").substring(0, 2) != '38') return false;
             // stop function, if value from DB is not match with input mask
 
-            event.keyCode && (keyCode = event.keyCode);
+            keyCode = event.keyCode || "";
             var pos = this.selectionStart;
             if (pos < 4) event.preventDefault();
             var matrix = "+38(___) ___ __ __",
@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", function() {
                 });
             i = new_value.indexOf("_");
             if (i != -1) {
-                i < 5 && (i = 4);
+                i = i < 5 ? 4 : i;
                 new_value = new_value.slice(0, i);
             }
             var reg = matrix.substr(0, this.value.length).replace(/_+/g,

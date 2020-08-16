@@ -11,19 +11,16 @@ const input_date_created = document.getElementById('date_created'),
       input_date_payed = document.getElementById('date_payed'),
       input_date_sent = document.getElementById('date_sent');
 
-const pathname = window.location.pathname,
-      order_api_pathname = `/api${pathname}`,
-      order_id = +pathname.replace(/\D+/g,"");
-
+const order_id = +pathname.replace(/\D+/g,"");
 
 // reload order on page load
-getData(order_api_pathname)
+getData(api_pathname)
 .then(data => {
     rebuildOrder(data);
 });
 
 //reloar orderitems on page load
-getData(`/api/items/?order=${order_id}`)
+getData(`${item_api_pathname}?order=${order_id}`)
 .then(data => {
     rebuildItems(data);
 });
@@ -68,7 +65,7 @@ function rebuildItems (data) {
         sum += price * amount;
         
         if (is_ready) row.classList.add("table-success");
-        row.classList.add('table_row');
+        row.classList.add('table_row', 'unselectable');
         row.id = id;
 
         row.innerHTML = `

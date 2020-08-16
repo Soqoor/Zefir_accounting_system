@@ -20,15 +20,12 @@ const btns_dropdown = document.getElementById('navbarDropdownFilters'),
       nav_buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all],
       buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all, btn_prev, btn_next],
 
-      // default api link
-      link = '/api/orders';
-
 // set default links for buttons
-btn_today.link = link + `?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
-btn_tomorrow.link = link + `?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
-btn_after_tomorrow.link = link + `?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
-btn_forgotten.link = link + `?is_sent=false&max_date_planed=${isoDateFromToday(-1)}`;
-btn_all.link = link + ``;
+btn_today.link = order_api_pathname + `?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
+btn_tomorrow.link = order_api_pathname + `?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
+btn_after_tomorrow.link = order_api_pathname + `?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
+btn_forgotten.link = order_api_pathname + `?is_sent=false&max_date_planed=${isoDateFromToday(-1)}`;
+btn_all.link = order_api_pathname + ``;
 btn_prev.link = '#';
 btn_next.link = '#';
 
@@ -127,6 +124,7 @@ function rebuildOrders (data) {
         
         if (is_sent) row.classList.add("table-success");
         if (date_planed < Date.now && !is_sent) row.classList.add("table-danger");
+        row.classList.add("unselectable");
 
         row.innerHTML = `
             <tr>

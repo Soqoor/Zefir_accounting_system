@@ -1,11 +1,14 @@
 'use strict';
 
 const minus = document.getElementById('minus'),
-      item_api_pathname = `/api/items/`;
+      plus = document.getElementById('plus'),
+      btn_add_item = document.getElementById('btn_add_item'),
+      btn_add_item_cancel = document.getElementById('btn_add_item_cancel');
 
 
 minus.addEventListener('click', changeClickMethod);
 document.addEventListener('items_loaded', changeClickMethod);
+plus.addEventListener('focus', () => plus.blur());
 
 function changeClickMethod () {
 

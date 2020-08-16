@@ -17,3 +17,12 @@ $bgDefault: #FFFFCC;
 .form-control::-webkit-input-placeholder {
     color: red;
   }
+
+
+.unselectable {
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
