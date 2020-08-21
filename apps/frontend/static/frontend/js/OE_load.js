@@ -58,7 +58,7 @@ function rebuildOrder (data) {
 function rebuildItems (data) {
     let sum = 0;
     
-    data.results.forEach (({id, product, description, amount, price, is_ready}) => {
+    data.results.forEach (({id, catalog_text, product_text, description, amount, price, is_ready}) => {
 
         const row = document.createElement('tr');
 
@@ -70,8 +70,8 @@ function rebuildItems (data) {
 
         row.innerHTML = `
             <tr>
-                <td>${product.catalog.category}</td>
-                <td>${product.name}</td>
+                <td>${catalog_text}</td>
+                <td>${product_text}</td>
                 <td>${description}</td>
                 <td>${amount}</td>
                 <td>${price}</td>

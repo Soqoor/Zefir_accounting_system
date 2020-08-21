@@ -18,7 +18,7 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.instagram) + ' / ' + self.date_planed.strftime('%d.%m.%y')
-
+    
 
 class OrderItem(models.Model):
     product = models.ForeignKey(
@@ -42,3 +42,9 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.product} - {self.amount}шт.'
+
+    def product_text(self):
+        return str(self.product)
+
+    def catalog_text(self):
+        return str(self.product.catalog)

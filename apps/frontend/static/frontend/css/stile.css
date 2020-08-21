@@ -26,3 +26,16 @@ $bgDefault: #FFFFCC;
     -webkit-user-select: none;
     user-select: none;
   }
+
+.tooltip-inner {
+    max-width: 600px;
+    text-align: left;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
