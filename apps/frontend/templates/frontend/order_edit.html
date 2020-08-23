@@ -44,11 +44,11 @@
 						</div>
 						<div class="form-group">
 							<label for="date_payed">Оплачено:</label> 
-							<input type="text" class="form-control form-control-sm" id="date_payed" name="date_payed" placeholder="Не оплачено"></input>
+							<input type="text" class="form-control form-control-sm form-control-red" id="date_payed" name="date_payed" placeholder="Не оплачено"></input>
 						</div>
 						<div class="form-group">
 							<label for="date_sent">Отправлено:</label>
-							<input type="text" class="form-control form-control-sm" id="date_sent" name="date_sent" placeholder="Не отправлено"></input>
+							<input type="text" class="form-control form-control-sm form-control-red" id="date_sent" name="date_sent" placeholder="Не отправлено"></input>
 						</div>
 					</div>
 
@@ -131,19 +131,37 @@
 		</div>
 		<div class="modal-body">
 			<div class="container-fluid">
-				<form id="order_form">
+				<form id="add_item_form">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="dropdown">
 								<div class="form-group">
+									<label for="exampleFormControlSelect1">Категория</label>
+									<select id='catalog_selector' class="form-control form-control-sm">
+										<option value="" selected disabled hidden>Выберите категорию</option>
+										<option id='1'>первый</option>
+										<option id='2'>второй</option>
+										<option id='3'>третий</option>
+									</select>
+								</div>
+								<div class="form-group collapse" id="div_product_select">
+									<label for="exampleFormControlSelect1">Товар</label>
+									<select id='product_selector' class="form-control form-control-sm">
+										<option value="" selected disabled hidden>Выберите товар</option>
+										<option id='1'>первый</option>
+										<option id='2'>второй</option>
+										<option id='3'>третий</option>
+									</select>
+								</div>
+								<div class="form-group" id="div_product_input">
 									<label for="product">Товар</label>
-									<input type="text" class="form-control form-control-sm" id="product" name="product" autocomplete="off"></input>
+									<input type="text" class="form-control form-control-sm" id="product_input" name="product" autocomplete="off" placeholder="Или начните вводить название товара"></input>
 									<div class="dropdown-menu" id='product_dropdown' aria-labelledby="product"></div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="date_planed">Описание</label>
-								<input type="text" class="form-control form-control-sm" id="description" name="description"></input>
+								<input type="text" id="product_description" class="form-control form-control-sm" name="description" disabled></input>
 							</div>
 						</div>
 					</div>
@@ -151,13 +169,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="product">Кол-во</label>
-								<input type="number" class="form-control form-control-sm" id="amount" name="amount"></input>
+								<input type="number" id="product_amount" class="form-control form-control-sm" name="amount" disabled></input>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="product">Цена</label>
-								<input type="number" class="form-control form-control-sm" id="price" name="price"></input>
+								<input type="number" id="product_price" class="form-control form-control-sm" name="price" disabled></input>
 							</div>
 						</div>
 					</div>
@@ -166,8 +184,10 @@
 			</div>
 		  </div>
 		<div class="modal-footer">
+		  <button type="button" id="btn_add_item_error" class="btn btn-danger collapse">Ошибка</button>
+		  <button type="button" id="btn_add_item_repeat_error" class="btn btn-danger collapse">Такой товар уже добавлен</button>
 		  <button type="button" id="btn_add_item_cancel" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-		  <button type="button" id="btn_add_item" class="btn btn-success">Добавить</button>
+		  <button type="button" id="btn_add_item_save" class="btn btn-success">Добавить</button>
 		</div>
 	  </div>
 	</div>

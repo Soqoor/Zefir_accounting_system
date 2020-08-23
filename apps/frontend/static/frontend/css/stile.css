@@ -14,7 +14,7 @@ $bgDefault: #FFFFCC;
 }
 
 /* for "не оплачено" and "не отправлено" input placeholders */
-.form-control::-webkit-input-placeholder {
+.form-control-red::-webkit-input-placeholder {
     color: red;
   }
 

@@ -8,7 +8,10 @@ class ProductFilter(FilterSet):
 
     class Meta:
         model = Product
-        fields = {'name': ['icontains']}
+        fields = {
+            'name': ['icontains'],
+            'catalog': ['exact']
+        }
 
 class ProductPagination(PageNumberPagination):
     page_size = 10

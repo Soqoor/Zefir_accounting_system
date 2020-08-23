@@ -19,7 +19,6 @@ function hideClientDropdown () {
 }
 
 function popoverEvent () {
-    console.log(clients_url + this.value);
     getData(clients_url + this.value)
     .then(data => {
         rebuildPopover(data);
@@ -34,7 +33,6 @@ async function getData (url) {
 
 
 function rebuildPopover (data) {
-    console.log(data);
     if (data.count != 0) {
         client_dropdown.innerHTML = "";
         client_dropdown.classList.add('show');
