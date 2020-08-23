@@ -42,10 +42,12 @@ function lineHighlight () {
 
 
 function deleteListener () {
-    deleteItem(item_api_pathname + this.id)
-    .then(res => {
-        if (res.status == 204) this.remove(); else console.log(res);
-    });
+    if (confirm('Вы действительно хотите удалить товар из заказа?')) {
+        deleteItem(item_api_pathname + this.id)
+        .then(res => {
+            if (res.status == 204) this.remove(); else console.log(res);
+        });
+    }
 }
 
 function isReadyListener () {
