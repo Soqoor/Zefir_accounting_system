@@ -8,6 +8,34 @@ $bgDefault: #FFFFCC;
     background-color: #FFFFCC;
 }
 
+/* for paginator in nav bar */
 .pagination {
     margin-bottom: 0;
+}
+
+/* for "не оплачено" and "не отправлено" input placeholders */
+.form-control-red::-webkit-input-placeholder {
+    color: red;
+  }
+
+
+.unselectable {
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+.tooltip-inner {
+    max-width: 600px;
+    text-align: left;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }

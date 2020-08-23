@@ -1,14 +1,33 @@
-from rest_framework.serializers import ModelSerializer, StringRelatedField
+from rest_framework.serializers import ModelSerializer, StringRelatedField, ReadOnlyField
 from .models import Order, OrderItem
 from ..products.serializers import ProductSerializer
 
 
+class OrderItemSerializer(ModelSerializer):
+    catalog_text = ReadOnlyField()
+    product_text = ReadOnlyField()
+
+    class Meta:
+        model = OrderItem
+        fields = [
+            'id',
+            'product',
+            'order',
+            'description',
+            'amount',
+            'price',
+            'is_ready',
+            'product_text',
+            'catalog_text'
+        ]
+
+
 class OrderSerializer(ModelSerializer):
-    orderitems = StringRelatedField(many=True, read_only=True)
+    orderitems = OrderItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = Order
-        fields = (
+        fields = [
             'id',
             'date_created',
             'date_planed',
@@ -23,20 +42,4 @@ class OrderSerializer(ModelSerializer):
             'is_sent',
             'date_sent',
             'orderitems',
-        )
-
-
-class OrderItemSerializer(ModelSerializer):
-    product = ProductSerializer(many=False, read_only=True)
-
-    class Meta:
-        model = OrderItem
-        fields = (
-            'id',
-            'product',
-            'order',
-            'description',
-            'amount',
-            'price',
-            'is_ready',
-        )
+        ]

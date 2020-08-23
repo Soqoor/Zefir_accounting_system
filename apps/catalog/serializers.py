@@ -7,5 +7,6 @@ class CatalogSerializer(ModelSerializer):
     class Meta:
         model = Catalog
         fields = (
+            'id',
             'category',
         )
