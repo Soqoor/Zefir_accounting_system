@@ -1,9 +1,6 @@
 'use strict';
 
-const   product_api_url = '/api/products/',
-        catalog_api_url = '/api/catalog/',
-        items_api_url = '/api/items/',
-        plus_button = document.getElementById('plus'),
+const   plus_button = document.getElementById('plus'),
         catalog_selector = document.getElementById('catalog_selector'),
         product_selector = document.getElementById('product_selector'),
         div_product_select = document.getElementById('div_product_select'),
@@ -23,12 +20,14 @@ async function getData (url) {
     return await res.json();
 }
 
+plus_button.addEventListener('focus', () => plus_button.blur());
+
 // modal window preparation:
 
 plus_button.addEventListener('click', resetModal);
 
 function catalogPrepare () {
-    getData(catalog_api_url)
+    getData(catalog_api_pathname)
         .then(data => {
             catalog_selector.innerHTML = '<option value="" selected disabled hidden>Выберите категорию</option>';
 
@@ -67,7 +66,7 @@ function catalogSelected () {
     div_product_select.classList.remove('collapse');
     div_product_input.classList.add('collapse');
 
-    getData(product_api_url + '?catalog=' + $(this).children(":selected").attr("id"))
+    getData(product_api_pathname + '?catalog=' + $(this).children(":selected").attr("id"))
         .then(data => {
             product_selector.innerHTML = '<option value="" selected disabled hidden>Выберите продукт</option>';
 
@@ -99,7 +98,7 @@ product_input.addEventListener('blur', () => setTimeout(productDropdownHide, 300
 
 function productDropdownShow () {
     if (this.value) {
-        getData(product_api_url + '?name__icontains=' +this.value)
+        getData(product_api_pathname + '?name__icontains=' +this.value)
         .then(data => {
             productRebuildDropdown(data);
         });
@@ -140,7 +139,7 @@ function productDropdownHide () {
 add_oi_save_button.addEventListener('click', postItem);
 
 function postItem() {
-    postItemData(items_api_url, generatePostItemData())
+    postData(items_api_pathname, 'POST', generatePostItemData())
     .then(res => {
         if (res.status == 201) {
             location.reload();
@@ -160,7 +159,7 @@ function postItem() {
 function generatePostItemData () {
     let data = {
         "product": product_input.dataset.id,
-        "order": +pathname.replace(/\D+/g,""),
+        "order": +current_pathname.replace(/\D+/g,""),
         "description": product_description.value,
         "amount": product_amount.value,
         "price": product_price.value,
@@ -171,24 +170,6 @@ function generatePostItemData () {
     return json;
 }
 
-async function postItemData (url = '', data = {}) {
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken
-        },
-        body: data
-    });
-
-    const status = res.status,
-          json = await res.json();
-
-    return {
-        'status': status,
-        'json': json
-    };
-}
 
 function alertSwapper(button) {
     add_oi_save_button.blur();

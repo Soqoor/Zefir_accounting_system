@@ -1,7 +1,7 @@
 'use strict';
 
 
-      // navigation buttons
+
 const btns_dropdown = document.getElementById('navbarDropdownFilters'),
       btn_today = document.getElementById('btn_today'),
       btn_tomorrow = document.getElementById('btn_tomorrow'),
@@ -11,23 +11,16 @@ const btns_dropdown = document.getElementById('navbarDropdownFilters'),
       btn_forgotten = document.getElementById('btn_forgotten'),
       btn_prev = document.getElementById('btn_prev'),
       btn_next = document.getElementById('btn_next'),
-      // buttons collection
       buttons = [btn_today, btn_tomorrow, btn_after_tomorrow, btn_forgotten, btn_all_unsent, btn_all, btn_prev, btn_next];
 
-// ONLOAD
-// set links for buttons
+
+// set href links for buttons
 btn_today.href = window.location.pathname + `?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
 btn_tomorrow.href = window.location.pathname + `?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
 btn_after_tomorrow.href = window.location.pathname + `?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
 btn_forgotten.href = window.location.pathname + `?is_sent=false&max_date_planed=${isoDateFromToday(-1)}`;
 btn_all_unsent.href = window.location.pathname + `?is_sent=false`;
 btn_all.href = window.location.pathname;
-
-// set events to change dropdown title
-buttons.forEach(function(btn){
-    btn.addEventListener('click', saveLastUsedButton);
-});
-
 
 // returns ISO date + number days from today
 function isoDateFromToday(number) {
@@ -37,6 +30,11 @@ function isoDateFromToday(number) {
     return target_day.toISOString().substring(0,10);
 }
 
+
+// set events to change dropdown title
+buttons.forEach(function(btn){
+    btn.addEventListener('click', saveLastUsedButton);
+});
 
 function saveLastUsedButton (e) {
     if (!e.currentTarget.classList.contains('page-link')) sessionStorage.setItem('last_used_button', e.currentTarget.textContent);

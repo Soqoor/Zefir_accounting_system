@@ -1,5 +1,8 @@
 'use strict';
 
+
+// add input mask in Ukr format to phone input field
+
 window.addEventListener("DOMContentLoaded", function() {
     [].forEach.call( document.querySelectorAll('.tel'), function(input) {
         var keyCode;

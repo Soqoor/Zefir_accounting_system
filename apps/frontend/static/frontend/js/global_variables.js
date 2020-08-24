@@ -1,10 +1,13 @@
 'use strict';
 
-const csrftoken = getCookie('csrftoken'),
-      pathname = window.location.pathname,
-      api_pathname = `/api${pathname}`,
-      order_api_pathname = '/api/orders',
-      item_api_pathname = `/api/items/`;
+const   csrftoken = getCookie('csrftoken'),
+        current_pathname = window.location.pathname,
+        current_api_pathname = `/api${current_pathname}`,
+        order_api_pathname = '/api/orders/',
+        items_api_pathname = `/api/items/`,
+        product_api_pathname = '/api/products/',
+        catalog_api_pathname = '/api/catalog/',
+        clients_api_pathname = '/api/clients/';
 
 
 function getCookie(name) {
@@ -21,4 +24,29 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+async function getData (url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error (`Could not fetch ${url}, status ${res.status}`);
+    return await res.json();
+}
+
+async function postData (url, method, data = {}) {
+    const res = await fetch(url, {
+        method: method,
+        headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+        },
+        body: data
+    });
+
+    const status = res.status,
+          json = await res.json();
+
+    return {
+        'status': status,
+        'json': json
+    };
 }

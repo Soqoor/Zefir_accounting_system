@@ -1,27 +1,21 @@
 'use strict';
       
-const pagination_bar = document.getElementById('pagination_bar'),
-      prev = document.getElementById('btn_prev'),
-      next = document.getElementById('btn_next'),
-      pagination_text_field = document.getElementById('pagination_text_field'),
-      li_prev = document.getElementById('li_prev'),
-      li_next = document.getElementById('li_next');
+
+// reload and rebuild orders list on page load
+
+const   orders_pagination_bar = document.getElementById('pagination_bar'),
+        orders_pagination_bar_li_prev = document.getElementById('li_prev'),
+        orders_pagination_bar_li_next = document.getElementById('li_next'),
+        orders_pagination_bar_btn_prev = document.getElementById('btn_prev'),
+        orders_pagination_bar_btn_next = document.getElementById('btn_next'),
+        orders_pagination_bar_text_field = document.getElementById('pagination_text_field');
 
 
-reloadOrders(order_api_pathname + window.location.search)
+getData(order_api_pathname + window.location.search)
     .then(data => {
         rebuildOrders(data);
     });
 
-async function reloadOrders (url) {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-        throw new Error (`Could not fetch ${url}, status ${res.status}`);
-    }
-
-    return await res.json();
-}
 
 function rebuildOrders (data) {
 
@@ -87,26 +81,26 @@ function rebuildOrders (data) {
 
     });
 
-    pagination_bar.classList.remove('collapse');
-    li_next.classList.remove('disabled');
-    li_prev.classList.remove('disabled');
+    orders_pagination_bar.classList.remove('collapse');
+    orders_pagination_bar_li_next.classList.remove('disabled');
+    orders_pagination_bar_li_prev.classList.remove('disabled');
 
     if (!data.next && !data.previous) {
-        pagination_bar.classList.add('collapse');
+        orders_pagination_bar.classList.add('collapse');
     } else {
 
-        pagination_text_field.textContent = `${data.page} из ${data.pages}`;
+        orders_pagination_bar_text_field.textContent = `${data.page} из ${data.pages}`;
     
         if (data.next) {
-            next.href = window.location.pathname + '?' + data.next.split('?')[1];
+            orders_pagination_bar_btn_next.href = window.location.pathname + '?' + data.next.split('?')[1];
         } else {
-            li_next.classList.add('disabled');
+            orders_pagination_bar_li_next.classList.add('disabled');
         }
     
         if (data.previous) {
-            prev.href = window.location.pathname + '?' + (data.previous.split('?')[1] || '');
+            orders_pagination_bar_btn_prev.href = window.location.pathname + '?' + (data.previous.split('?')[1] || '');
         } else {
-            li_prev.classList.add('disabled');
+            orders_pagination_bar_li_prev.classList.add('disabled');
         }
 
     }
