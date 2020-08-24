@@ -7,8 +7,8 @@ def main_page(request):
 
 
 def orders_request(request):
-    return render(request, 'frontend/orders_list.html')
+    return render(request, 'frontend/orders.html')
 
 
 def order_edit(request, pk):
-    return render(request, 'frontend/order_edit.html', {'pk': pk})
+    return render(request, 'frontend/order.html', {'pk': pk})

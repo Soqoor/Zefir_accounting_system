@@ -1,34 +1,32 @@
 'use strict';
 
-const clients_url = '/api/clients/?instagram=',
-      client_input = document.getElementById('instagram'),
-      client_dropdown = document.getElementById('client_dropdown'),
-      client_phone = document.getElementById('phone'),
-      client_name = document.getElementById('name'),
-      client_city = document.getElementById('city'),
-      client_np_department = document.getElementById('np_department');
+
+// client input dropdown hint
+
+const   client_input = document.getElementById('instagram'),
+        client_dropdown = document.getElementById('client_dropdown'),
+        client_phone = document.getElementById('phone'),
+        client_name = document.getElementById('name'),
+        client_city = document.getElementById('city'),
+        client_np_department = document.getElementById('np_department');
 
 
-client_input.addEventListener('input', popoverEvent);
+client_input.addEventListener('input', clientDropdownShow);
 client_input.addEventListener('blur', () => {
-    setTimeout(hideClientDropdown, 300);
+    setTimeout(clientDropdownHide, 300);
 });
 
-function hideClientDropdown () {
+
+function clientDropdownHide () {
     client_dropdown.classList.remove('show');
 }
 
-function popoverEvent () {
-    getData(clients_url + this.value)
+
+function clientDropdownShow () {
+    getData(clients_api_pathname + '?instagram=' + this.value)
     .then(data => {
         rebuildPopover(data);
     });
-}
-
-async function getData (url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error (`Could not fetch ${url}, status ${res.status}`);
-    return await res.json();
 }
 
 

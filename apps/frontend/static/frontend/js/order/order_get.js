@@ -1,39 +1,36 @@
 'use strict';
 
-const input_date_created = document.getElementById('date_created'),
-      input_date_planed = document.getElementById('date_planed'),
-      input_date_deadline = document.getElementById('date_deadline'),
-      input_instagram = document.getElementById('instagram'),
-      input_name = document.getElementById('name'),
-      input_phone = document.getElementById('phone'),
-      input_city = document.getElementById('city'),
-      input_np_department = document.getElementById('np_department'),
-      input_date_payed = document.getElementById('date_payed'),
-      input_date_sent = document.getElementById('date_sent');
 
-const order_id = +pathname.replace(/\D+/g,"");
+// reload and rebuild order and orderitems on page load
 
-// reload order on page load
-getData(api_pathname)
-.then(data => {
-    rebuildOrder(data);
-});
-
-//reloar orderitems on page load
-getData(`${item_api_pathname}?order=${order_id}`)
-.then(data => {
-    rebuildItems(data);
-});
+const   order_id = +current_pathname.replace(/\D+/g,""),
+        order_title = document.getElementById('order_title'),
+        div_items = document.getElementById('div_items'),
+        input_date_created = document.getElementById('date_created'),
+        input_date_planed = document.getElementById('date_planed'),
+        input_date_deadline = document.getElementById('date_deadline'),
+        input_instagram = document.getElementById('instagram'),
+        input_name = document.getElementById('name'),
+        input_phone = document.getElementById('phone'),
+        input_city = document.getElementById('city'),
+        input_np_department = document.getElementById('np_department'),
+        input_date_payed = document.getElementById('date_payed'),
+        input_date_sent = document.getElementById('date_sent');
 
 
-async function getData (url) {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-        throw new Error (`Could not fetch ${url}, status ${res.status}`);
-    }
-
-    return await res.json();
+if (order_id == 0){
+    order_title.textContent = 'Новый заказ';
+    order_title.classList.add('text-danger');
+} else {
+    div_items.classList.remove('collapse');
+    getData(current_api_pathname)
+    .then(data => {
+        rebuildOrder(data);
+    });
+    getData(items_api_pathname + '?order=' + order_id)
+    .then(data => {
+        rebuildItems(data);
+    });
 }
 
 
@@ -54,6 +51,7 @@ function rebuildOrder (data) {
     let event = new Event("blur");
     input_phone.dispatchEvent(event); // trigger for phone mask
 }
+
 
 function rebuildItems (data) {
     let sum = 0;

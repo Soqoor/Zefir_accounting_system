@@ -3,7 +3,7 @@ from ..products.models import Product
 
 
 class Order(models.Model):
-    date_created = models.DateField()
+    date_created = models.DateField(auto_now_add=True)
     date_planed = models.DateField()  # planned date of sending the order
     date_deadline = models.DateField()  # customer deadline
     instagram = models.CharField(max_length=20)  # client instagram id
