@@ -50,3 +50,32 @@ async function postData (url, method, data = {}) {
         'json': json
     };
 }
+
+const   pagination_bar = document.getElementById('pagination_bar'),
+        pagination_bar_li_prev = document.getElementById('li_prev'),
+        pagination_bar_li_next = document.getElementById('li_next'),
+        pagination_bar_btn_prev = document.getElementById('btn_prev'),
+        pagination_bar_btn_next = document.getElementById('btn_next'),
+        pagination_bar_text_field = document.getElementById('pagination_text_field');
+
+function rebuildPaginationBar(data) {
+    pagination_bar.classList.remove('collapse');
+    pagination_bar_li_next.classList.remove('disabled');
+    pagination_bar_li_prev.classList.remove('disabled');
+
+    if (!data.next && !data.previous) {
+        pagination_bar.classList.add('collapse');
+    } else {
+        pagination_bar_text_field.textContent = `${data.page} из ${data.pages}`;
+        if (data.next) {
+            pagination_bar_btn_next.href = window.location.pathname + '?' + data.next.split('?')[1];
+        } else {
+            pagination_bar_li_next.classList.add('disabled');
+        }
+        if (data.previous) {
+            pagination_bar_btn_prev.href = window.location.pathname + '?' + (data.previous.split('?')[1] || '');
+        } else {
+            pagination_bar_li_prev.classList.add('disabled');
+        }
+    }
+}

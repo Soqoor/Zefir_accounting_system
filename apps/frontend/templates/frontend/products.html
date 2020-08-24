@@ -1,0 +1,51 @@
+{% extends 'frontend/base.html' %}
+
+{% load static %}
+
+{% block nav_bar_addition %}
+<div id="pagination_bar">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled"><a id="pagination_text_field" class="page-link" href="#">1</a></li>
+        <li class="page-item" id="li_prev">
+            <a id="btn_prev" class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <li class="page-item" id="li_next">
+            <a id="btn_next" class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Категория</th>
+            <th scope="col">Название</th>
+            <th scope="col">Цена</th>
+          </tr>
+        </thead>
+        <tbody class="table_body">
+  
+        </tbody>
+      </table>
+</div>    
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'frontend/js/global_variables.js' %}"></script>
+    <script src="{% static 'frontend/js/products/post_changes.js' %}"></script>
+    <script src="{% static 'frontend/js/products/products_get.js' %}"></script>
+    <!-- <script src="{% static 'frontend/js/products/products_buttons.js' %}"></script> -->
+{% endblock %}
