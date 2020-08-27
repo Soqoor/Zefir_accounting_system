@@ -29,14 +29,3 @@ function isoDateFromToday(number) {
     target_day.setHours(target_day.getHours() - target_day.getTimezoneOffset()/60);
     return target_day.toISOString().substring(0,10);
 }
-
-
-// set events to change dropdown title
-buttons.forEach(function(btn){
-    btn.addEventListener('click', saveLastUsedButton);
-});
-
-function saveLastUsedButton (e) {
-    if (!e.currentTarget.classList.contains('page-link')) sessionStorage.setItem('last_used_button', e.currentTarget.textContent);
-    if (e.currentTarget.href != '#') sessionStorage.setItem('last_used_url', e.currentTarget.href);
-}

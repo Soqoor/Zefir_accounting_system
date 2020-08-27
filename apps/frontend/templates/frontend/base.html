@@ -15,7 +15,7 @@
         <!-- Favicon-->
         <link rel="shortcut icon" href="{% static 'frontend/images/zefir_logo_64.jpg' %}" type="image/jpg">
 
-        <title>Hello, world!</title>
+        <title>Art Studio Zefir</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light bg-custom">
@@ -28,8 +28,27 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <li>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFilters" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Заказы
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownFilters">
+                                  <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
+                                  <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
+                                  <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a id="btn_all_unsent" class="dropdown-item" href="#">Все невыполненные</a>
+                                  <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a id="btn_forgotten" class="dropdown-item text-danger" href="#">Просроченные</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" id ="btn_orders" href="/orders/?is_sent=false">Заказы</a>
+                        <a class="nav-link" id ="link_products" href="/products/">Товары</a>
                     </li>
                 </ul>
                 {% block nav_bar_addition %}

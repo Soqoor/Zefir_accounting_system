@@ -1,7 +1,5 @@
-$bgDefault: #FFFFCC;
-
 .navbar-custom {
-    background-color: $bgDefault;
+    background-color: #FFFFCC;
 }
 
 .bg-custom {

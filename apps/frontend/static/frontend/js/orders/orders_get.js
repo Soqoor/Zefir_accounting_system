@@ -85,24 +85,6 @@ function rebuildOrders (data) {
     orders_pagination_bar_li_next.classList.remove('disabled');
     orders_pagination_bar_li_prev.classList.remove('disabled');
 
-    if (!data.next && !data.previous) {
-        orders_pagination_bar.classList.add('collapse');
-    } else {
-
-        orders_pagination_bar_text_field.textContent = `${data.page} из ${data.pages}`;
-    
-        if (data.next) {
-            orders_pagination_bar_btn_next.href = window.location.pathname + '?' + data.next.split('?')[1];
-        } else {
-            orders_pagination_bar_li_next.classList.add('disabled');
-        }
-    
-        if (data.previous) {
-            orders_pagination_bar_btn_prev.href = window.location.pathname + '?' + (data.previous.split('?')[1] || '');
-        } else {
-            orders_pagination_bar_li_prev.classList.add('disabled');
-        }
-
-    }
+    rebuildPaginationBar(data);
     
 }

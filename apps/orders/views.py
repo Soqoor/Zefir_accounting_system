@@ -4,6 +4,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.pagination import PageNumberPagination
 from .serializers import OrderSerializer, OrderItemSerializer
 from .models import Order, OrderItem
+import datetime
 
 
 
@@ -98,4 +99,23 @@ def clients_list(request):
         if json['count'] == 10:
             break
     
+    return JsonResponse(json)
+
+def orders_count(request):
+    json = {}
+
+    orders_today = Order.objects.filter(date_planed__exact=datetime.date.today())
+    orders_tomorrow = Order.objects.filter(date_planed__exact=datetime.date.today() + datetime.timedelta(days=1))
+    orders_aftertomorrow = Order.objects.filter(date_planed__exact=datetime.date.today() + datetime.timedelta(days=2))
+    orders_unsent = Order.objects.filter(is_sent__exact=False)
+    orders_forgotten = orders_unsent.filter(date_planed__lt=datetime.date.today())
+    orders_all = Order.objects.all()
+        
+    json['orders_today'] = len(orders_today)
+    json['orders_tomorrow'] = len(orders_tomorrow)
+    json['orders_aftertomorrow'] = len(orders_aftertomorrow)
+    json['orders_unsent'] = len(orders_unsent)
+    json['orders_forgotten'] = len(orders_forgotten)
+    json['orders_all'] = len(orders_all)
+
     return JsonResponse(json)

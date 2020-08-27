@@ -66,7 +66,7 @@ function rebuildPaginationBar(data) {
     if (!data.next && !data.previous) {
         pagination_bar.classList.add('collapse');
     } else {
-        pagination_bar_text_field.textContent = `${data.page} из ${data.pages}`;
+        pagination_bar_text_field.textContent = `Страница ${data.page} из ${data.pages}`;
         if (data.next) {
             pagination_bar_btn_next.href = window.location.pathname + '?' + data.next.split('?')[1];
         } else {
