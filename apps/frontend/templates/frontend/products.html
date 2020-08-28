@@ -3,6 +3,14 @@
 {% load static %}
 
 {% block nav_bar_addition %}
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" id ="link_new_category" data-toggle="modal" data-target="#addCategoryModal" href="#">Новая категория</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id ="link_new_product" data-toggle="modal" data-target="#addProductModal" href="#">Новый товар</a>
+    </li>
+</ul>
 {% endblock %}
 
 
@@ -40,11 +48,88 @@
         </li>
     </ul>
 </div>
+
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLongTitle">Добавить новый товар</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="container-fluid">
+				<form id="add_product_form">
+					<div class="row">
+						<div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Категория</label>
+                                <select id='catalog_selector' class="form-control form-control-sm">
+                                    <option value="" selected disabled hidden>Выберите категорию</option>
+                                    <option id='1'>первый</option>
+                                    <option id='2'>второй</option>
+                                    <option id='3'>третий</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="div_product_input">
+                                <label for="product">Товар</label>
+                                <input type="text" class="form-control form-control-sm" id="name_input" name="product" autocomplete="off"></input>
+                            </div>
+							<div class="form-group">
+								<label for="product">Цена</label>
+								<input type="number" id="price_default_input" class="form-control form-control-sm" name="price_default"></input>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		  </div>
+		<div class="modal-footer">
+		  <button type="button" id="btn_add_product_error" class="btn btn-danger collapse">На заполнены все поля, или такой товар уже существует</button>
+		  <button type="button" id="btn_add_product_cancel" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+		  <button type="button" id="btn_add_product_save" class="btn btn-success">Добавить</button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLongTitle">Добавить новую категорию товаров</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="container-fluid">
+				<form id="add_category_form">
+					<div class="row">
+						<div class="col-md-12">
+                            <div class="form-group" id="div_product_input">
+                                <label for="product">Название категории</label>
+                                <input type="text" class="form-control form-control-sm" id="category_input" name="category" autocomplete="off"></input>
+                            </div>
+						</div>
+					</div>
+				</form>
+			</div>
+		  </div>
+		<div class="modal-footer">
+		  <button type="button" id="btn_add_category_error" class="btn btn-danger collapse">Ошибка, возможно такая категория уже существует</button>
+		  <button type="button" id="btn_add_category_cancel" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+		  <button type="button" id="btn_add_category_save" class="btn btn-success">Добавить</button>
+		</div>
+	  </div>
+	</div>
+</div>
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'frontend/js/global_variables.js' %}"></script>
     <script src="{% static 'frontend/js/products/post_changes.js' %}"></script>
     <script src="{% static 'frontend/js/products/products_get.js' %}"></script>
-    <!-- <script src="{% static 'frontend/js/products/products_buttons.js' %}"></script> -->
+    <script src="{% static 'frontend/js/products/add_new.js' %}"></script>
 {% endblock %}

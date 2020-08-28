@@ -35,14 +35,14 @@
                                     Заказы
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownFilters">
+                                    <a id="btn_forgotten" class="dropdown-item text-danger" href="#">Просроченные</a>
                                   <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
                                   <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
                                   <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
                                   <div class="dropdown-divider"></div>
-                                  <a id="btn_all_unsent" class="dropdown-item" href="#">Все невыполненные</a>
-                                  <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
+                                  <a id="btn_all_unsent" class="dropdown-item" href="#">Открытые</a>
                                   <div class="dropdown-divider"></div>
-                                  <a id="btn_forgotten" class="dropdown-item text-danger" href="#">Просроченные</a>
+                                  <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
                                 </div>
                             </li>
                         </ul>
@@ -70,6 +70,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
         <!-- Custom JS-->
+        <script src="{% static 'frontend/js/global_variables.js' %}"></script>
         <script src="{% static 'frontend/js/base.js' %}"></script>
         {% block script %}
         {% endblock %}

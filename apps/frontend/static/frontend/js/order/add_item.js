@@ -14,11 +14,6 @@ const   plus_button = document.getElementById('plus'),
         btn_add_item_error = document.getElementById('btn_add_item_error'),
         btn_add_item_repeat_error = document.getElementById('btn_add_item_repeat_error');
 
-async function getData (url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error (`Could not fetch ${url}, status ${res.status}`);
-    return await res.json();
-}
 
 plus_button.addEventListener('focus', () => plus_button.blur());
 
