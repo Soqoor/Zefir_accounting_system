@@ -7,7 +7,8 @@ const   csrftoken = getCookie('csrftoken'),
         items_api_pathname = `/api/items/`,
         product_api_pathname = '/api/products/',
         catalog_api_pathname = '/api/catalog/',
-        clients_api_pathname = '/api/clients/';
+        clients_api_pathname = '/api/clients/',
+        count_api_pathname = '/api/count/';
 
 
 function getCookie(name) {
