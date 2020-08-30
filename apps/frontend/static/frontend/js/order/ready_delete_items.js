@@ -45,7 +45,7 @@ function lineRedHighlight () {
 
 function itemDeleteListener () {
     if (confirm('Вы действительно хотите удалить товар из заказа?')) {
-        postData(item_api_pathname + this.id, 'DELETE')
+        postData(items_api_pathname + this.id, 'DELETE')
         .then(res => {
             if (res.status == 204) this.remove(); else console.log(res);
         });
@@ -61,7 +61,7 @@ function itemIsReadyListener () {
         data = {'is_ready': true};
     }
     data = JSON.stringify(data);
-    postData(item_api_pathname + this.id + '/', 'PATCH', data)
+    postData(items_api_pathname + this.id + '/', 'PATCH', data)
     .then(res => {
         if (res.status == 200) this.classList.toggle('table-success'); else console.log(res);
     });
