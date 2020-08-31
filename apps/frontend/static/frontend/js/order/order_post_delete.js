@@ -46,11 +46,13 @@ function generateOrderData (form) {
     formData.forEach(function(value, key) {
         if (key == 'id' && +current_pathname.replace(/\D+/g,"") == 0) return; //skip id if new order
         if (value == '') value = null;
-        if (key == 'phone') value = value.replace(/\D/g, ""); // dismiss phone mask
+        if (key == 'phone' && value) value = value.replace(/\D/g, ""); // dismiss phone mask
         data[key] = value;
     });
     data.date_payed ? data.is_payed = true : data.is_payed = false;
     data.date_sent ? data.is_sent = true : data.is_sent = false;
+    if (!data.city) delete data.city; // "null" is forbidden. django creates empty value if key absent
+    if (!data.name) delete data.name;
 
     
     const json = JSON.stringify(data);
