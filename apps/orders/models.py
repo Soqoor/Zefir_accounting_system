@@ -5,12 +5,12 @@ from ..products.models import Product
 class Order(models.Model):
     date_created = models.DateField(auto_now_add=True)
     date_planed = models.DateField()  # planned date of sending the order
-    date_deadline = models.DateField()  # customer deadline
-    instagram = models.CharField(max_length=20)  # client instagram id
-    phone = models.IntegerField()
-    name = models.CharField(max_length=20)
-    city = models.CharField(max_length=20)
-    np_department = models.IntegerField()  # NovaPoshta department number
+    date_deadline = models.DateField(blank=True, null=True)  # customer deadline
+    instagram = models.CharField(max_length=30)  # client instagram id
+    phone = models.IntegerField(blank=True, null=True)
+    name = models.CharField(max_length=30, blank=True)
+    city = models.CharField(max_length=30, blank=True)
+    np_department = models.IntegerField(blank=True, null=True)  # NovaPoshta department number
     is_payed = models.BooleanField(default=False)
     date_payed = models.DateField(blank=True, null=True)
     is_sent = models.BooleanField(default=False)
@@ -37,7 +37,6 @@ class OrderItem(models.Model):
     is_ready = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ['order', 'product']
         ordering = ['product']
 
     def __str__(self):
