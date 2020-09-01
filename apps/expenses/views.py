@@ -6,6 +6,7 @@ from .models import Expenses, ExpensesCategory
 class ExpensesCategoryView(ListCreateAPIView):
     queryset = ExpensesCategory.objects.all()
     serializer_class = ExpensesCategorySerializer
+    pagination_class = None
 
 class SingleExpensesCategoryView(RetrieveUpdateDestroyAPIView):
     queryset = ExpensesCategory.objects.all()

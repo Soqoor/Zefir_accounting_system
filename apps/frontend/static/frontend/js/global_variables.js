@@ -8,6 +8,8 @@ const   csrftoken = getCookie('csrftoken'),
         product_api_pathname = '/api/products/',
         catalog_api_pathname = '/api/catalog/',
         clients_api_pathname = '/api/clients/',
+        expenses_api_pathname = '/api/expenses/',
+        expenses_cat_api_pathname = '/api/expenses_cat/',
         count_api_pathname = '/api/count/';
 
 

@@ -16,6 +16,9 @@ class Order(models.Model):
     is_sent = models.BooleanField(default=False)
     date_sent = models.DateField(blank=True, null=True)
 
+    class Meta:
+        ordering = ['-date_planed']
+
     def __str__(self):
         return str(self.instagram) + ' / ' + self.date_planed.strftime('%d.%m.%y')
     

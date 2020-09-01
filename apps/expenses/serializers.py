@@ -18,6 +18,7 @@ class ExpensesSerializer(ModelSerializer):
         model = Expenses
         fields = [
             'id',
+            'created',
             'date',
             'name',
             'value',
