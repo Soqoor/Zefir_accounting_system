@@ -3,16 +3,22 @@ from datetime import date, datetime
 from ..catalog.models import Catalog
 from ..products.models import Product
 from ..orders.models import Order, OrderItem
+from ..expenses.models import Expenses, ExpensesCategory
 
 
 def data_correct(request):
-    start = Order.objects.get(id=1858).date_planed
+    orders_start = Order.objects.get(id=1858).date_planed
+    expenses_start = Expenses.objects.get(id=541).date
     finish = datetime.now().date()
-    delta = finish - start
+    orders_delta = finish - orders_start
+    expenses_delta = finish - expenses_start
     for order in Order.objects.all():
-        order.date_planed += delta
+        order.date_planed += orders_delta
         order.save()
-    return HttpResponse(f'Даты сдвинуты к актуальным значениям на {delta}')
+    for exp in Expenses.objects.all():
+        exp.date += expenses_delta
+        exp.save()
+    return HttpResponse(f'Заказы сдвинуты на {orders_delta}, траты на {expenses_delta}')
 
 def data_load(request):
     start = datetime.now()
@@ -20,10 +26,14 @@ def data_load(request):
     Order.objects.all().delete()
     Product.objects.all().delete()
     Catalog.objects.all().delete()
+    Expenses.objects.all().delete()
+    ExpensesCategory.objects.all().delete()
     load_categories()
     load_products()
     load_orders()
     load_orderitems()
+    load_expensescategory()
+    load_expenses()
     data_correct(request)
     finish = datetime.now()
     delta = finish - start
@@ -96,4 +106,33 @@ def load_orderitems():
             is_ready=bool(int(lst[6]))
         )
         new_orderitem.save()
+    return
+
+def load_expensescategory():
+    file = open('apps/datatransfer/data_files/expensescategory.tsv', encoding = 'utf-8', mode = 'r')
+    for line in file:
+        lst = line.rstrip().split('\t')
+        if lst[0] == 'skip':
+            continue
+        new_cat = ExpensesCategory(
+            id=int(lst[0]), 
+            name=lst[1]
+        )
+        new_cat.save()
+    return
+
+def load_expenses():
+    file = open('apps/datatransfer/data_files/expenses.tsv', encoding = 'utf-8', mode = 'r')
+    for line in file:
+        lst = line.rstrip().split('\t')
+        if lst[0] == 'skip':
+            continue
+        new_exp = Expenses(
+            id=int(lst[0]),
+            date=lst[1],
+            category=ExpensesCategory.objects.get(id=int(lst[2])),
+            name=lst[3],
+            value=int(lst[4]),
+        )
+        new_exp.save()
     return
