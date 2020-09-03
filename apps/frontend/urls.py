@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import main_page, orders_request, order_edit, products_request
+from .views import main_page, orders_request, order_edit, products_request, expenses_request
 
 app_name = 'frontend'
 urlpatterns = [
@@ -7,5 +7,5 @@ urlpatterns = [
     path('orders/', orders_request),
     path('orders/<int:pk>/', order_edit),
     path('products/', products_request),
-    # path('items/<int:pk>', SingleOrderItemViev.as_view()),
+    path('expenses/', expenses_request),
 ]
