@@ -2,17 +2,141 @@
 
 {% load static %}
 
-{% block content %}
-    <div class="main_page_body">
-        <a type="button" class="btn btn-primary" href="/api/dataload/">Сброс</a>
-        <a type="button" class="btn btn-primary" href="/api/datacorrect/">Корректировка</a>
-        <a type="button" class="btn btn-primary" href="/orders/0/">Новый заказ</a>
-        <a type="button" class="btn btn-primary" href="/products/">Товары</a>
-        <br><br><br>
-    </div>
+{% block nav_bar_addition %}
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" id ="link_new_order" href="/api/dataload/" 
+        data-toggle="tooltip" data-placement="bottom" 
+        title="
+            <div>Сбрасывает данные БД на значения по умолчанию для тестирования.</div>
+            <div>Процесс занимает до 1 минуты.</div>
+            <div>Функционал исключительно для тестирования,</div>
+            <div>должен быть удален перед запуском в эксплуатацию.</div>
+        ">Сброс БД</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id ="link_new_order" href="/api/datacorrect/" 
+        data-toggle="tooltip" data-placement="bottom" 
+        title="
+            <div>Сдвигает даты записей в БД, чтоб они были актуальными.</div>
+            <div>Процесс занимает до 1 минуты.</div>
+            <div>Функционал исключительно для тестирования,</div>
+            <div>должен быть удален перед запуском в эксплуатацию.</div>
+        ">Корректировка БД</a>
+    </li>
+</ul>
+{% endblock %}
 
+{% block content %}
+<div class="container col-12 col-md-4">
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr class="d-flex">
+                <th class="col text-left">Пн</th>
+                <th class="col text-left">Вт</th>
+                <th class="col text-left">Ср</th>
+                <th class="col text-left">Чт</th>
+                <th class="col text-left">Пт</th>
+                <th class="col text-left">Сб</th>
+                <th class="col text-left">Вс</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="d-flex">
+                <td class="col text-center">
+                    <div class="d-inline align-top">1</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom invisible">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">2</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">41</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">3</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">1</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">4</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">5</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">6</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">7</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+            </tr>
+            <tr class="d-flex">
+                <td class="col text-center">
+                    <div class="d-inline align-top">8</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">9</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">10</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">11</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">12</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">13</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">14</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+            </tr>
+            <tr class="d-flex">
+                <td class="col text-center">
+                    <div class="d-inline align-top">15</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">16</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">17</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">18</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">19</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">20</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+                <td class="col text-center">
+                    <div class="d-inline align-top">21</div>
+                    <a href="#" class="badge badge-pill badge-info d-inline float-right align-bottom">4</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'frontend/js/main_page_script.js' %}"></script>
+    <script src="{% static 'frontend/js/main_page/navbar.js' %}"></script>
 {% endblock %}
