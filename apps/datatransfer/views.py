@@ -5,7 +5,7 @@ from ..products.models import Product
 from ..orders.models import Order, OrderItem
 from ..expenses.models import Expenses, ExpensesCategory
 
-
+# testing tool. Making changes in DB to have good data to test all features in UI
 def data_correct(request):
     orders_start = Order.objects.get(id=1858).date_planed
     expenses_start = Expenses.objects.get(id=541).date
@@ -14,12 +14,24 @@ def data_correct(request):
     expenses_delta = finish - expenses_start
     for order in Order.objects.all():
         order.date_planed += orders_delta
+        order.date_created += orders_delta
+        if order.date_deadline:
+            order.date_deadline += orders_delta
         order.save()
     for exp in Expenses.objects.all():
         exp.date += expenses_delta
         exp.save()
+    new_exp = Expenses(
+        date='2020-03-01',
+        category=ExpensesCategory.objects.get(id=1),
+        name='Тест для отрицательной прибыли',
+        value=19000,
+        )
+    new_exp.save()
+    
     return HttpResponse(f'Заказы сдвинуты на {orders_delta}, траты на {expenses_delta}')
 
+# clear all database and transfer old data from datafiles
 def data_load(request):
     start = datetime.now()
     OrderItem.objects.all().delete()
@@ -34,7 +46,6 @@ def data_load(request):
     load_orderitems()
     load_expensescategory()
     load_expenses()
-    data_correct(request)
     finish = datetime.now()
     delta = finish - start
     return HttpResponse(f'Данные БД сброшены на значения поумолчанию за время: {delta}')
@@ -75,6 +86,7 @@ def load_orders():
             continue
         new_order = Order(
             id=int(lst[0]),
+            date_created=lst[1],
             date_planed=lst[2],
             instagram=lst[4],
             is_payed=bool(int(lst[12])),

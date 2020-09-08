@@ -16,3 +16,6 @@ def products_request(request):
 
 def expenses_request(request):
     return render(request, 'frontend/expenses.html')
+
+def charts_request(request):
+    return render(request, 'frontend/charts.html')

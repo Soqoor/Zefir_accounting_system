@@ -35,14 +35,16 @@
                                     Заказы
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownFilters">
+                                    <a class="dropdown-item text-success" href="/orders/0/">Новый заказ</a>
+                                    <div class="dropdown-divider"></div>
                                     <a id="btn_forgotten" class="dropdown-item text-danger" href="#">Просроченные</a>
-                                  <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
-                                  <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
-                                  <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a id="btn_all_unsent" class="dropdown-item" href="#">Открытые</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
+                                    <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
+                                    <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
+                                    <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a id="btn_all_unsent" class="dropdown-item" href="#">Открытые</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
                                 </div>
                             </li>
                         </ul>
@@ -51,19 +53,21 @@
                         <a class="nav-link" id ="link_products" href="/products/">Товары</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id ="link_products" href="/expenses/">Расходы</a>
+                        <a class="nav-link" id ="link_expenses" href="/expenses/">Расходы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id ="link_charts" href="/charts/">Статистика</a>
                     </li>
                 </ul>
                 {% block nav_bar_addition %}
                 {% endblock %}
             </div>
         </nav>
-        
-        {% block collapse_body %}
-        {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+        <div class="container mt-3">
+            {% block content %}
+            {% endblock %}
+        </div>
 
 
         <!-- Optional JavaScript -->
@@ -71,6 +75,9 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- ChartsJS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
         <!-- Custom JS-->
         <script src="{% static 'frontend/js/global_variables.js' %}"></script>
