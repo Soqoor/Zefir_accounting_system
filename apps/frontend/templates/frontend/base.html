@@ -61,6 +61,14 @@
                 </ul>
                 {% block nav_bar_addition %}
                 {% endblock %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form class="form-inline">
+                            <input id="search_input" class="form-control form-control-sm mr-sm-2" type="search" placeholder="Поиск по заказам" aria-label="Search" autocomplete="off">
+                            <button id="search_btn" class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Поиск</button>
+                          </form>
+                    </li>
+                </ul>
             </div>
         </nav>
 
@@ -69,6 +77,18 @@
             {% endblock %}
         </div>
 
+        <footer class="footer">
+            <div class="container">
+                <button id="datatransfer_btn" type="button" class="btn btn-outline-secondary btn-sm">Сброс данных</button>
+                <div id="datatransfer_spinner" class="spinner-border text-secondary align-middle ml-3 d-none" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <button id="datatransfer_success" type="button" class="btn btn-success btn-sm d-none">Успешно!</button>
+                <button id="datatransfer_danger" type="button" class="btn btn-danger btn-sm d-none">Ошибка!</button>
+                <span class="float-right font-weight-light font-italic mr-2">© Soqoor, 2020</span>
+                <span class="float-right font-weight-bold mr-2">Art-Studio "Zefir" homebrewed CRM-system</span>
+            </div>
+        </footer>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

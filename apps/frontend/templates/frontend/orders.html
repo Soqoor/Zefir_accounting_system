@@ -3,16 +3,6 @@
 {% load static %}
 
 {% block nav_bar_addition %}
-
-<ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-        <form class="form-inline">
-            <input id="search_input" class="form-control form-control-sm mr-sm-2" type="search" placeholder="Поиск по заказам" aria-label="Search" autocomplete="off">
-            <button id="search_btn" class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Поиск</button>
-          </form>
-    </li>
-</ul>
-
 {% endblock %}
 
 
@@ -55,5 +45,4 @@
 
 {% block script %}
     <script src="{% static 'frontend/js/orders/orders_get.js' %}"></script>
-    <script src="{% static 'frontend/js/orders/navbar.js' %}"></script>
 {% endblock %}

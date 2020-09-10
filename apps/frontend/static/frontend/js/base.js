@@ -30,6 +30,7 @@ function isoDateFromToday(number) {
     return target_day.toISOString().substring(0,10);
 }
 
+// set buttons number of orders
 function setOrdersButtonsText () {
     getData(count_api_pathname)
     .then(data => {
@@ -46,3 +47,40 @@ function setOrdersButtonsText () {
         btn_all.textContent = `Все заказы (${data.orders_all})`;
     });
 }
+
+
+// activate orders search
+const   search_input = document.getElementById('search_input'),
+        search_btn = document.getElementById('search_btn');
+
+search_btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(`/orders/search/?query=${search_input.value}`, '_parent');
+});
+
+
+// datatransfer buttons for testing data
+const   datatransfer_btn = document.getElementById('datatransfer_btn'),
+        datatransfer_spinner = document.getElementById('datatransfer_spinner'),
+        datatransfer_success = document.getElementById('datatransfer_success'),
+        datatransfer_danger = document.getElementById('datatransfer_danger');
+
+datatransfer_btn.addEventListener('click', () => {
+    datatransfer_btn.blur();
+    if (confirm('Это действие очистит все записи в базе данных приложения и восстановит значения по умолчанию, предназначенные для пользовательского тестирования. Продолжить?')) {
+        datatransfer_spinner.classList.remove('d-none');
+        getData('/api/dataload/')
+        .then(data => {
+            datatransfer_spinner.classList.add('d-none');
+            if (data.status == 200) {
+                datatransfer_success.textContent = `Сброс успешно выполнен за ${data.time} секунд`;
+                datatransfer_success.classList.remove('d-none');
+                setTimeout( () => datatransfer_success.classList.add('d-none'), 5000);
+            }
+            else {
+                datatransfer_danger.classList.remove('d-none');
+                setTimeout( () => datatransfer_danger.classList.add('d-none'), 5000);
+            }
+        });
+    }
+});

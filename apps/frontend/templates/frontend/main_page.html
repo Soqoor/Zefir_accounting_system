@@ -3,34 +3,16 @@
 {% load static %}
 
 {% block nav_bar_addition %}
-<ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-        <a class="nav-link" id ="link_new_order" href="/api/dataload/" 
-        data-toggle="tooltip" data-placement="bottom" 
-        title="
-            <div>Сбрасывает данные БД на значения по умолчанию для тестирования.</div>
-            <div>Процесс занимает до 1 минуты.</div>
-            <div>Функционал исключительно для тестирования,</div>
-            <div>должен быть удален перед запуском в эксплуатацию.</div>
-        ">Сброс БД</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id ="link_new_order" href="/api/datacorrect/" 
-        data-toggle="tooltip" data-placement="bottom" 
-        title="
-            <div>Сдвигает даты записей в БД, чтоб они были актуальными.</div>
-            <div>Процесс занимает до 1 минуты.</div>
-            <div>Функционал исключительно для тестирования,</div>
-            <div>должен быть удален перед запуском в эксплуатацию.</div>
-        ">Корректировка БД</a>
-    </li>
-</ul>
 {% endblock %}
 
 {% block content %}
 <div class="container mt-3">
     <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-7">
+            <div class="h2 text-muted text-center">Календарь заказов</div>
+        </div>
+        <div class="col-12 col-md-5">
+            <div class="h2 text-muted text-center">Календарь заказов</div>
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="d-flex">
@@ -44,15 +26,14 @@
                     </tr>
                 </thead>
                 <tbody class="table_body">
-                    
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-md-3">
-    
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-md-7">
         </div>
-        <div class="col-12 col-md-3">
-    
+        <div class="col-12 col-md-5">
         </div>
     </div>
 </div>

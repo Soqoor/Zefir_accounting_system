@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import JsonResponse
 from datetime import date, datetime
 from ..catalog.models import Catalog
 from ..products.models import Product
@@ -7,6 +7,7 @@ from ..expenses.models import Expenses, ExpensesCategory
 
 # testing tool. Making changes in DB to have good data to test all features in UI
 def data_correct(request):
+    start = datetime.now()
     orders_start = Order.objects.get(id=1858).date_planed
     expenses_start = Expenses.objects.get(id=541).date
     finish = datetime.now().date()
@@ -28,8 +29,13 @@ def data_correct(request):
         value=19000,
         )
     new_exp.save()
-    
-    return HttpResponse(f'Заказы сдвинуты на {orders_delta}, траты на {expenses_delta}')
+
+    finish = datetime.now()
+    delta = finish - start
+    response = {
+        'time': delta
+    }
+    return JsonResponse(response)
 
 # clear all database and transfer old data from datafiles
 def data_load(request):
@@ -46,9 +52,15 @@ def data_load(request):
     load_orderitems()
     load_expensescategory()
     load_expenses()
+    data_correct(request)
     finish = datetime.now()
-    delta = finish - start
-    return HttpResponse(f'Данные БД сброшены на значения поумолчанию за время: {delta}')
+    delta = round((finish - start).total_seconds())
+
+    response = {
+        'status': 200,
+        'time': delta
+    }
+    return JsonResponse(response)
 
 def load_categories():
     file = open('apps/datatransfer/data_files/category.tsv', encoding = 'utf-8', mode = 'r')
