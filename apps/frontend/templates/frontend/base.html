@@ -65,12 +65,103 @@
                     <li class="nav-item">
                         <form class="form-inline">
                             <input id="search_input" class="form-control form-control-sm mr-sm-2" type="search" placeholder="Поиск по заказам" aria-label="Search" autocomplete="off">
-                            <button id="search_btn" class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Поиск</button>
+                            <div class="btn-group">
+                                <button id="search_btn" class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Поиск</button>
+                                <button id="collapse_btn" type="button" class="btn btn-outline-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="collapse" data-target="#collapseSearchFilters" aria-expanded="false" aria-controls="collapseSearchFilters">
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                              </div>
                           </form>
                     </li>
                 </ul>
             </div>
         </nav>
+
+        <div class="collapse bg-custom pb-3" id="collapseSearchFilters">
+            <div class="container">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="instagram">Instagram:</label>
+                                <input name="instagram" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="name">Имя:</label>
+                                <input name="name" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="city">Город:</label>
+                                <input name="city" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="phone">Телефон:</label>
+                                <input name="phone" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Дата создания с, по:</label>
+                                <input name="min_date_created" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                                <input name="max_date_created" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Отправка с, по:</label>
+                                <input name="min_date_planed" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                                <input name="max_date_planed" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Дата праздника с, по:</label>
+                                <input name="min_date_deadline" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                                <input name="max_date_deadline" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Оплачено:</label>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_payed" id="search_is_payed_false" value="false">
+                                    <label class="form-check-label" for="search_is_payed_false">Нет</label>
+                                </div>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_payed" id="search_is_payed_true" value="true">
+                                    <label class="form-check-label" for="search_is_payed_true">Да</label>
+                                </div>
+                                <label>Отправлено:</label>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_sent" id="search_is_sent_false" value="false">
+                                    <label class="form-check-label" for="inlineRadio1">Нет</label>
+                                </div>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_sent" id="search_is_sent_true" value="true">
+                                    <label class="form-check-label" for="inlineRadio2">Да</label>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="adv_search_reset_btn" class="btn btn-outline-secondary btn-sm btn-block">Сброс</button>
+                                    </div>
+                                    <div class="col">
+                                        <button id="adv_search_btn" type="submit" class="btn btn-outline-success btn-sm btn-block">Искать</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <div class="container mt-3">
             {% block content %}
@@ -102,6 +193,7 @@
         <!-- Custom JS-->
         <script src="{% static 'frontend/js/global_variables.js' %}"></script>
         <script src="{% static 'frontend/js/base.js' %}"></script>
+        <script src="{% static 'frontend/js/search_and_filters.js' %}"></script>
         {% block script %}
         {% endblock %}
 

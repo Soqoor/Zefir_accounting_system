@@ -48,17 +48,6 @@ function setOrdersButtonsText () {
     });
 }
 
-
-// activate orders search
-const   search_input = document.getElementById('search_input'),
-        search_btn = document.getElementById('search_btn');
-
-search_btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open(`/orders/search/?query=${search_input.value}`, '_parent');
-});
-
-
 // datatransfer buttons for testing data
 const   datatransfer_btn = document.getElementById('datatransfer_btn'),
         datatransfer_spinner = document.getElementById('datatransfer_spinner'),
