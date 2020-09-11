@@ -1,7 +1,9 @@
 from django.http import JsonResponse
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet, DateFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 from .serializers import OrderSerializer, OrderItemSerializer
 from .models import Order, OrderItem
 import datetime
@@ -48,7 +50,7 @@ class SingleOrderView(RetrieveUpdateDestroyAPIView):
 
 
 class OrderItemPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 1000
 
 class OrderItemView(ListCreateAPIView):
     queryset = OrderItem.objects.all()
@@ -61,6 +63,33 @@ class OrderItemView(ListCreateAPIView):
 class SingleOrderItemViev(RetrieveUpdateDestroyAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+class Search(ListAPIView):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+    def get(self, request):
+        if not 'query' in request.GET or request.GET['query'] == '':
+            queryset = Order.objects.all()
+        else:
+            queryset = Order.objects.filter(
+                Q(instagram__icontains=request.GET['query']) |
+                Q(phone__icontains=request.GET['query']) | 
+                Q(name__icontains=request.GET['query']) | 
+                Q(city__icontains=request.GET['query']) |
+                Q(orderitem__description__icontains=request.GET['query']) |
+                Q(orderitem__product__name__icontains=request.GET['query']) 
+            ).distinct() # related fields will be added to the selected columns and they may make otherwise duplicate rows appear to be distinct
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            result = self.get_paginated_response(serializer.data)
+            data = result.data # pagination data
+        else:
+            serializer = self.get_serializer(queryset, many=True)
+            data = serializer.data
+        return Response(data)
 
 
 def clients_list(request):

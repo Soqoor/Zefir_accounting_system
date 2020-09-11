@@ -1,0 +1,36 @@
+{% extends 'frontend/base.html' %}
+
+{% load static %}
+
+{% block nav_bar_addition %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3" id="loading_bar">
+    <div class="d-flex align-items-center">
+        <strong class="text-info">Loading...</strong>
+        <div class="spinner-border ml-auto text-info" role="status" aria-hidden="true"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <canvas id="chart_1" height="400"></canvas>
+        </div>
+        <div class="col-4">
+            <canvas id="chart_2" height="400"></canvas>
+        </div>
+        <div class="col-4">
+            <canvas id="chart_3" height="400"></canvas>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'frontend/js/charts/charts.js' %}"></script>
+{% endblock %}

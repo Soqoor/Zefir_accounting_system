@@ -4,13 +4,16 @@ const   csrftoken = getCookie('csrftoken'),
         current_pathname = window.location.pathname,
         current_api_pathname = `/api${current_pathname}`,
         order_api_pathname = '/api/orders/',
+        search_api_pathname = '/api/orders/search/',
         items_api_pathname = `/api/items/`,
         product_api_pathname = '/api/products/',
         catalog_api_pathname = '/api/catalog/',
         clients_api_pathname = '/api/clients/',
         expenses_api_pathname = '/api/expenses/',
         expenses_cat_api_pathname = '/api/expenses_cat/',
-        count_api_pathname = '/api/count/';
+        count_api_pathname = '/api/count/',
+        calendar_api_pathname = '/api/calendar/',
+        charts_api_pathname = '/api/charts/';
 
 
 function getCookie(name) {

@@ -35,14 +35,16 @@
                                     Заказы
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownFilters">
+                                    <a class="dropdown-item text-success" href="/orders/0/">Новый заказ</a>
+                                    <div class="dropdown-divider"></div>
                                     <a id="btn_forgotten" class="dropdown-item text-danger" href="#">Просроченные</a>
-                                  <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
-                                  <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
-                                  <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a id="btn_all_unsent" class="dropdown-item" href="#">Открытые</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
+                                    <a id="btn_today" class="dropdown-item" href="#">Сегодня</a>
+                                    <a id="btn_tomorrow" class="dropdown-item" href="#">Завтра</a>
+                                    <a id="btn_after_tomorrow" class="dropdown-item" href="#">Послезавтра</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a id="btn_all_unsent" class="dropdown-item" href="#">Открытые</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a id="btn_all" class="dropdown-item" href="#">Все заказы</a>
                                 </div>
                             </li>
                         </ul>
@@ -51,20 +53,133 @@
                         <a class="nav-link" id ="link_products" href="/products/">Товары</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id ="link_products" href="/expenses/">Расходы</a>
+                        <a class="nav-link" id ="link_expenses" href="/expenses/">Расходы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id ="link_charts" href="/charts/">Статистика</a>
                     </li>
                 </ul>
                 {% block nav_bar_addition %}
                 {% endblock %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form class="form-inline">
+                            <input id="search_input" class="form-control form-control-sm mr-sm-2" type="search" placeholder="Поиск по заказам" aria-label="Search" autocomplete="off">
+                            <div class="btn-group">
+                                <button id="search_btn" class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Поиск</button>
+                                <button id="collapse_btn" type="button" class="btn btn-outline-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="collapse" data-target="#collapseSearchFilters" aria-expanded="false" aria-controls="collapseSearchFilters">
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                              </div>
+                          </form>
+                    </li>
+                </ul>
             </div>
         </nav>
-        
-        {% block collapse_body %}
-        {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+        <div class="collapse bg-custom pb-3" id="collapseSearchFilters">
+            <div class="container">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="instagram">Instagram:</label>
+                                <input name="instagram" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="name">Имя:</label>
+                                <input name="name" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="city">Город:</label>
+                                <input name="city" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label for="phone">Телефон:</label>
+                                <input name="phone" type="text" class="form-control form-control-sm adv_search">
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Дата создания с, по:</label>
+                                <input name="min_date_created" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                                <input name="max_date_created" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Отправка с, по:</label>
+                                <input name="min_date_planed" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                                <input name="max_date_planed" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Дата праздника с, по:</label>
+                                <input name="min_date_deadline" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                                <input name="max_date_deadline" type="text" class="form-control form-control-sm form-control-short adv_search" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container mt-2">
+                                <label>Оплачено:</label>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_payed" id="search_is_payed_false" value="false">
+                                    <label class="form-check-label" for="search_is_payed_false">Нет</label>
+                                </div>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_payed" id="search_is_payed_true" value="true">
+                                    <label class="form-check-label" for="search_is_payed_true">Да</label>
+                                </div>
+                                <label>Отправлено:</label>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_sent" id="search_is_sent_false" value="false">
+                                    <label class="form-check-label" for="inlineRadio1">Нет</label>
+                                </div>
+                                <div class="form-check form-check-inline float-right">
+                                    <input class="form-check-input adv_search" type="radio" name="is_sent" id="search_is_sent_true" value="true">
+                                    <label class="form-check-label" for="inlineRadio2">Да</label>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="adv_search_reset_btn" class="btn btn-outline-secondary btn-sm btn-block">Сброс</button>
+                                    </div>
+                                    <div class="col">
+                                        <button id="adv_search_btn" type="submit" class="btn btn-outline-success btn-sm btn-block">Искать</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <div class="container mt-3">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <button id="datatransfer_btn" type="button" class="btn btn-outline-secondary btn-sm">Сброс данных</button>
+                <div id="datatransfer_spinner" class="spinner-border text-secondary align-middle ml-3 d-none" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <button id="datatransfer_success" type="button" class="btn btn-success btn-sm d-none">Успешно!</button>
+                <button id="datatransfer_danger" type="button" class="btn btn-danger btn-sm d-none">Ошибка!</button>
+                <span class="float-right font-weight-light font-italic mr-2">© Soqoor, 2020</span>
+                <span class="float-right font-weight-bold mr-2">Art-Studio "Zefir" homebrewed CRM-system</span>
+            </div>
+        </footer>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -72,9 +187,13 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+        <!-- ChartsJS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
         <!-- Custom JS-->
         <script src="{% static 'frontend/js/global_variables.js' %}"></script>
         <script src="{% static 'frontend/js/base.js' %}"></script>
+        <script src="{% static 'frontend/js/search_and_filters.js' %}"></script>
         {% block script %}
         {% endblock %}
 

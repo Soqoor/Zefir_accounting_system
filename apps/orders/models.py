@@ -1,9 +1,10 @@
 from django.db import models
+from datetime import date
 from ..products.models import Product
 
 
 class Order(models.Model):
-    date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateField(default=date.today)
     date_planed = models.DateField()  # planned date of sending the order
     date_deadline = models.DateField(blank=True, null=True)  # customer deadline
     instagram = models.CharField(max_length=30)  # client instagram id
@@ -33,6 +34,7 @@ class OrderItem(models.Model):
         Order,
         related_name='orderitems',
         on_delete=models.CASCADE,
+        related_query_name="orderitem"
     )
     description = models.TextField(blank=True)
     amount = models.IntegerField()

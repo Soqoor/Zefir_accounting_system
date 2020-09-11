@@ -10,8 +10,14 @@ const   orders_pagination_bar = document.getElementById('pagination_bar'),
         orders_pagination_bar_btn_next = document.getElementById('btn_next'),
         orders_pagination_bar_text_field = document.getElementById('pagination_text_field');
 
+let link = '';
+if (window.location.pathname.includes('search')) {
+    link = search_api_pathname;
+} else {
+    link = order_api_pathname;
+}
 
-getData(order_api_pathname + window.location.search)
+getData(link + window.location.search)
     .then(data => {
         rebuildOrders(data);
     });
@@ -65,7 +71,7 @@ function createRow(order, tooltip) {
     row.dataset.placement = 'bottom';
     row.title = tooltip;
     row.addEventListener('click', () => {
-        window.open(`${order.id}/`, '_parent');
+        window.open(`/orders/${order.id}/`, '_parent');
     });
 
     const td_instagram = document.createElement('td');

@@ -2,17 +2,46 @@
 
 {% load static %}
 
+{% block nav_bar_addition %}
+{% endblock %}
+
 {% block content %}
-    <div class="main_page_body">
-        <a type="button" class="btn btn-primary" href="/api/dataload/">Сброс</a>
-        <a type="button" class="btn btn-primary" href="/api/datacorrect/">Корректировка</a>
-        <a type="button" class="btn btn-primary" href="/orders/0/">Новый заказ</a>
-        <a type="button" class="btn btn-primary" href="/products/">Товары</a>
-        <br><br><br>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12 col-md-7">
+            <div class="h2 text-muted text-center">Календарь заказов</div>
+        </div>
+        <div class="col-12 col-md-5">
+            <div class="h2 text-muted text-center">Календарь заказов</div>
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="col text-left">Пн</th>
+                        <th class="col text-left">Вт</th>
+                        <th class="col text-left">Ср</th>
+                        <th class="col text-left">Чт</th>
+                        <th class="col text-left">Пт</th>
+                        <th class="col text-left">Сб</th>
+                        <th class="col text-left">Вс</th>
+                    </tr>
+                </thead>
+                <tbody class="table_body">
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="row mt-3">
+        <div class="col-12 col-md-7">
+        </div>
+        <div class="col-12 col-md-5">
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'frontend/js/main_page_script.js' %}"></script>
+    <script src="{% static 'frontend/js/main_page/navbar.js' %}"></script>
+    <script src="{% static 'frontend/js/main_page/calendar.js' %}"></script>
 {% endblock %}
