@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, permission_required
 import requests
 
+
+def login(request):
+    return render(request, 'frontend/login.html')
 
 def main_page(request):
     return render(request, 'frontend/main_page.html')
