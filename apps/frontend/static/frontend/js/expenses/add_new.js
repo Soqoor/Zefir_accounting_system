@@ -37,7 +37,6 @@ function resetExpenseModal () {
     categoryPrepare();
     name_input.value = '';
     value_input.value = '';
-    console.log();
     date_input.value = new Date().toISOString().substr(0, 10);
 }
 

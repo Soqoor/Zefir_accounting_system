@@ -15,7 +15,6 @@ order_save_btn.addEventListener('click', (e) => {
     if (order_pk == 0) {
         postData(order_api_pathname, 'POST', generateOrderData(order_form))
         .then(res => {
-            console.log(res);
             if (res.status == 201) window.open(current_pathname.replace('0', res.json.id), '_parent'); else orderOkAlert(order_ok_alert, false);
         });
     } else {
@@ -33,7 +32,12 @@ order_delete_button.addEventListener('click', (e) => {
     if (confirm('Вы действительно хотите удалить этот заказ?')) {
         postData(current_api_pathname, 'DELETE')
         .then(res => {
-            if (res.status == 200) console.log(res); else console.log(res);
+            console.log(res);
+            if (res.status == 204) {
+                window.open(document.referrer, '_parent');
+            } else {
+                console.log(res);
+            }
         });
     }
     e.currentTarget.blur();

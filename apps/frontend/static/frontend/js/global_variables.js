@@ -1,6 +1,8 @@
 'use strict';
 
 const   csrftoken = getCookie('csrftoken'),
+        login_pathname = '/api/login/',
+        logout_pathname = '/api/logout/',
         current_pathname = window.location.pathname,
         current_api_pathname = `/api${current_pathname}`,
         order_api_pathname = '/api/orders/',
@@ -48,8 +50,11 @@ async function postData (url, method, data = {}) {
         body: data
     });
 
-    const status = res.status,
-          json = await res.json();
+    const status = res.status;
+    let json = '';
+    if (status != 204) {
+        json = await res.json();
+    }
 
     return {
         'status': status,
