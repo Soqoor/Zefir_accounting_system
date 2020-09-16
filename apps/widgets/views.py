@@ -1,10 +1,12 @@
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.decorators import login_required, permission_required
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from ..orders.models import Order, OrderItem
 from ..expenses.models import Expenses
 
 
+@login_required
 def calendar(request):
     response = {
         'missed': {
@@ -39,6 +41,7 @@ def calendar(request):
             
     return JsonResponse(response)
 
+@permission_required('widgets.view_dashboards')
 def charts(request):
     response = {
         'labels': [],

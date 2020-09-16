@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet, DateFilter
+from django.contrib.auth.decorators import login_required
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -92,6 +93,7 @@ class Search(ListAPIView):
         return Response(data)
 
 
+@login_required
 def clients_list(request):
     json = {
         'count': 0,
@@ -130,6 +132,8 @@ def clients_list(request):
     
     return JsonResponse(json)
 
+
+@login_required
 def orders_count(request):
     json = {}
 

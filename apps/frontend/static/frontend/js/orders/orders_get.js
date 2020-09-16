@@ -1,5 +1,5 @@
 'use strict';
-      
+
 
 // reload and rebuild orders list on page load
 

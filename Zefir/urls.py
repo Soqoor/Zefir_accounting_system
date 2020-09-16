@@ -18,6 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('apps.frontend.urls')),
+    path('api/', include('apps.users.urls')),
     path('api/', include('apps.orders.urls')),
     path('api/', include('apps.products.urls')),
     path('api/', include('apps.catalog.urls')),

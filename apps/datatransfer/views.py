@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from datetime import date, datetime
 from ..catalog.models import Catalog
 from ..products.models import Product
@@ -6,6 +7,7 @@ from ..orders.models import Order, OrderItem
 from ..expenses.models import Expenses, ExpensesCategory
 
 # testing tool. Making changes in DB to have good data to test all features in UI
+@login_required
 def data_correct(request):
     start = datetime.now()
     orders_start = Order.objects.get(id=1858).date_planed
@@ -38,6 +40,7 @@ def data_correct(request):
     return JsonResponse(response)
 
 # clear all database and transfer old data from datafiles
+@login_required
 def data_load(request):
     start = datetime.now()
     OrderItem.objects.all().delete()

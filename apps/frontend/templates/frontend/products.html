@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block nav_bar_addition %}
+{% if perms.products.add_product %}
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
         <a class="nav-link" id ="link_new_category" data-toggle="modal" data-target="#addCategoryModal" href="#">Новая категория</a>
@@ -11,6 +12,7 @@
         <a class="nav-link" id ="link_new_product" data-toggle="modal" data-target="#addProductModal" href="#">Новый товар</a>
     </li>
 </ul>
+{% endif %}
 {% endblock %}
 
 

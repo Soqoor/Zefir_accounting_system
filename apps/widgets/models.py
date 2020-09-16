@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class Dashboards(models.Model):
+    pass
+# class needed for creating premissions

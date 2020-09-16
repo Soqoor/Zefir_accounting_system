@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'apps.materials',
     'apps.catalog',
     'apps.expenses',
+    'apps.widgets',
 ]
 
 REST_FRAMEWORK = {
@@ -57,7 +58,10 @@ REST_FRAMEWORK = {
     'DATE_FORMAT': 'iso-8601',
     'DATE_INPUT_FORMATS' : ['iso-8601', '%d.%m.%y'],
     'DEFAULT_PAGINATION_CLASS':    
-         'Zefir.pagination.CustomPagination'
+         'Zefir.pagination.CustomPagination',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissions'
+    ]
 }
 
 MIDDLEWARE = [
@@ -140,6 +144,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = '/login/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

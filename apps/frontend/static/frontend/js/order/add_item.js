@@ -144,7 +144,6 @@ function postItem() {
                 alertSwapper(btn_add_item_repeat_error);
             }
             else {
-                console.log(res);
                 alertSwapper(btn_add_item_error);
             }
         }
