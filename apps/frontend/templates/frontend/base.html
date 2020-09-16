@@ -52,12 +52,16 @@
                     <li class="nav-item">
                         <a class="nav-link" id ="link_products" href="/products/">Товары</a>
                     </li>
+                    {% if perms.expenses %}
                     <li class="nav-item">
                         <a class="nav-link" id ="link_expenses" href="/expenses/">Расходы</a>
                     </li>
+                    {% endif %}
+                    {% if perms.widgets %}
                     <li class="nav-item">
                         <a class="nav-link" id ="link_charts" href="/charts/">Статистика</a>
                     </li>
+                    {% endif %}
                 </ul>
                 {% block nav_bar_addition %}
                 {% endblock %}

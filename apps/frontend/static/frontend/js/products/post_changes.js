@@ -24,11 +24,9 @@ function patchChanges() {
     let data = {};
     data[this.dataset.field_name] = this.value;
     const json = JSON.stringify(data);
-    console.log(json);
     this.blur();
     postData(product_api_pathname + this.dataset.product_id +'/', 'PATCH', json)
     .then(res => {
-        console.log(res);
         successAlert(this);
     });
 }

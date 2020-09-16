@@ -20,10 +20,11 @@
 						<!-- <label id="order_ok_alert" type="button" class="btn btn-success btn-sm">Сохранено</label> -->
 					</div>
 				</div>
-
+				{% if perms.orders.delete_order %}
 				<div class="col">
 					<button type="button" id="order_delete_button" class="btn btn-outline-danger btn-sm float-right">&#128465;</button>
 				</div>
+				{% endif %}
 			</div>
 
 			<form id="order_form">
@@ -78,12 +79,13 @@
 
 				</div>
 
+				{% if perms.orders.change_order %}
 				<div class="row">
 					<div class="col-md-12">
 						<button type="button" id="btn_save" class="btn btn-outline-success btn-sm btn-block">Сохранить</button>
 					</div>
 				</div>
-
+				{% endif %}
 
 			</form>
 		</div>
@@ -95,10 +97,12 @@
 						Позиции заказа
 					</h4>
 				</div>
+				{% if perms.orders.add_orderitem %}
 				<div class="col">
 					<button type="button" id="minus" class="btn btn-outline-danger btn-sm float-right">&#9473;</button>
 					<button type="button" id="plus" class="btn btn-outline-success btn-sm float-right" data-toggle="modal" data-target="#addItemModal">&#9547;</button>
 				</div>
+				{% endif %}
 			</div>
 
 			<table class="table table-hover table-sm">
