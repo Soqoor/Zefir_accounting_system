@@ -13,9 +13,9 @@ const btns_dropdown = document.getElementById('navbarDropdownFilters'),
 
 
 // set href links for buttons
-btn_today.href = `/orders/?max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
-btn_tomorrow.href = `/orders/?max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
-btn_after_tomorrow.href = `/orders/?max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
+btn_today.href = `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
+btn_tomorrow.href = `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(1)}&min_date_planed=${isoDateFromToday(1)}`;
+btn_after_tomorrow.href = `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(2)}&min_date_planed=${isoDateFromToday(2)}`;
 btn_forgotten.href = `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(-1)}`;
 btn_all_unsent.href = `/orders/?is_sent=false`;
 btn_all.href = '/orders/';
@@ -72,4 +72,22 @@ datatransfer_btn.addEventListener('click', () => {
             }
         });
     }
+});
+
+//logout button
+const btn_logout = document.getElementById('btn_logout');
+
+btn_logout.addEventListener('click', e => {
+    getData(logout_pathname)
+    .then(data => {
+        window.open(data.url, '_parent');
+    });
+});
+
+//reset session storage for main page table
+const home_btn = document.getElementById('home_btn');
+
+home_btn.addEventListener('click', e => {
+    sessionStorage.removeItem('calendar_date');
+    sessionStorage.setItem('calendar_link', `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`);
 });

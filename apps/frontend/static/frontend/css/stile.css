@@ -51,3 +51,8 @@
     min-width: 100%;
     width: 150px;
 }
+
+.scrolling {
+    height:500px;
+    overflow-y: scroll;
+  }
