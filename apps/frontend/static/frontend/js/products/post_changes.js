@@ -21,6 +21,14 @@ document.addEventListener('products_loaded', () => {
 });
 
 function patchChanges() {
+
+    if (localStorage.getItem('advanced_user') != 'true') {
+        if (!confirm('Внести изменения в товар?')) {
+            location.reload();
+            return;
+        }
+    }
+
     let data = {};
     data[this.dataset.field_name] = this.value;
     const json = JSON.stringify(data);

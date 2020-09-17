@@ -12,6 +12,13 @@ const   order_form = document.getElementById('order_form'),
 
 order_save_btn.addEventListener('click', (e) => {
     e.preventDefault();
+
+    if (localStorage.getItem('advanced_user') != 'true') {
+        if (!confirm('Внести изменения в заказ?')) {
+            return;
+        }
+    }
+
     if (order_pk == 0) {
         postData(order_api_pathname, 'POST', generateOrderData(order_form))
         .then(res => {
@@ -29,18 +36,24 @@ order_save_btn.addEventListener('click', (e) => {
 
 order_delete_button.addEventListener('click', (e) => {
     e.preventDefault();
-    if (confirm('Вы действительно хотите удалить этот заказ?')) {
-        postData(current_api_pathname, 'DELETE')
-        .then(res => {
-            console.log(res);
-            if (res.status == 204) {
-                window.open(document.referrer, '_parent');
-            } else {
-                console.log(res);
-            }
-        });
-    }
     e.currentTarget.blur();
+
+    if (localStorage.getItem('advanced_user') != 'true') {
+        if (!confirm('Вы действительно хотите удалить этот заказ?')) {
+            return;
+        }
+    }
+
+    postData(current_api_pathname, 'DELETE')
+    .then(res => {
+        console.log(res);
+        if (res.status == 204) {
+            window.open(document.referrer, '_parent');
+        } else {
+            console.log(res);
+        }
+    });
+
 });
 
 
