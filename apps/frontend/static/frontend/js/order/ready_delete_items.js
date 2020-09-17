@@ -44,12 +44,18 @@ function lineRedHighlight () {
 
 
 function itemDeleteListener () {
-    if (confirm('Вы действительно хотите удалить товар из заказа?')) {
-        postData(items_api_pathname + this.id, 'DELETE')
-        .then(res => {
-            if (res.status == 204) this.remove(); else console.log(res);
-        });
+
+    if (localStorage.getItem('advanced_user') != 'true') {
+        if (!confirm('Вы действительно хотите удалить товар из заказа?')) {
+            return;
+        }
     }
+
+    postData(items_api_pathname + this.id, 'DELETE')
+    .then(res => {
+        if (res.status == 204) this.remove(); else console.log(res);
+    });
+
 }
 
 

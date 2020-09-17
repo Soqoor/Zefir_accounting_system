@@ -23,6 +23,14 @@ document.addEventListener('expenses_loaded', () => {
 });
 
 function patchChanges() {
+
+    if (localStorage.getItem('advanced_user') != 'true') {
+        if (!confirm('Внести изменения в расходы?')) {
+            location.reload();
+            return;
+        }
+    }
+
     let data = {};
     data[this.dataset.field_name] = this.value;
     const json = JSON.stringify(data);

@@ -64,6 +64,13 @@ function add_order_row(order) {
         btn.classList.remove('text-success');
     });
     btn.addEventListener('click', () => {
+
+        if (localStorage.getItem('advanced_user') != 'true') {
+            if (!confirm('отметить заказ как отправленный?')) {
+                return;
+            }
+        }
+
         const data = {
             'is_sent' : true,
             'date_sent' : new Date().toISOString().substring(0,10)
