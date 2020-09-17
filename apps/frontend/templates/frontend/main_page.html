@@ -9,26 +9,48 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12 col-md-7">
-            <div class="h2 text-muted text-center">Wellcome, {{ user.get_username }}</div>
-            <button id="btn_logout" type="button" class="btn btn-outline-dark btn-sm">Logout</button>
+            <div id="title_h2" class="h2 text-muted text-left">Привет, {{ user.get_short_name }}!</div>
+            <div id="title_h5" class="h5 text-muted text-left">Сегодня мы планируем отправить заказы:</div>
+            <div class="scrolling">
+                <table class="table table-hover table-sm">
+                    <tbody class="table_body" id="orders_body">
+                    
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
+        
         <div class="col-12 col-md-5">
-            <div class="h2 text-muted text-center">Календарь заказов</div>
-            <table class="table table-bordered table-sm">
-                <thead>
-                    <tr class="d-flex">
-                        <th class="col text-left">Пн</th>
-                        <th class="col text-left">Вт</th>
-                        <th class="col text-left">Ср</th>
-                        <th class="col text-left">Чт</th>
-                        <th class="col text-left">Пт</th>
-                        <th class="col text-left">Сб</th>
-                        <th class="col text-left">Вс</th>
-                    </tr>
-                </thead>
-                <tbody class="table_body">
-                </tbody>
-            </table>
+            <div class="row d-block">
+                <div class="h2 text-muted text-left">Календарь заказов</div>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col text-left">Пн</th>
+                            <th class="col text-left">Вт</th>
+                            <th class="col text-left">Ср</th>
+                            <th class="col text-left">Чт</th>
+                            <th class="col text-left">Пт</th>
+                            <th class="col text-left">Сб</th>
+                            <th class="col text-left">Вс</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table_body" id="calendar_body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="row d-block">
+                <div class="h2 text-muted text-left">Настройки</div>
+                
+                <form>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch1">
+                        <label class="custom-control-label" for="switch1">Запрашивать подтверждение каждый раз, когда Ваши действия ведут к изменению данных в приложении</label>
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
     <div class="row mt-3">
@@ -45,4 +67,5 @@
 {% block script %}
     <script src="{% static 'frontend/js/main_page/navbar.js' %}"></script>
     <script src="{% static 'frontend/js/main_page/calendar.js' %}"></script>
+    <script src="{% static 'frontend/js/main_page/orders_table.js' %}"></script>
 {% endblock %}

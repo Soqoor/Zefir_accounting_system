@@ -13,29 +13,42 @@ def calendar(request):
             'count': 0,
             'link': '',
         },
+        'long_term': {
+            'count': 0,
+            'link': '',
+        },
         'calendar': []
     }
     today = datetime.now().date()
     yesterday = today - timedelta(days=1)
     weekday = today.weekday()
     start = today - timedelta(days=weekday)
+    finish = start + timedelta(days=28)
 
     missed_orders = len(Order.objects.filter(date_planed__lt=today, is_sent=False))
     if (missed_orders):
         response['missed']['count'] = missed_orders
         response['missed']['link'] = f'/orders/?is_sent=false&max_date_planed={yesterday}'
 
+    long_term_orders = len(Order.objects.filter(date_planed__gte=finish, is_sent=False))
+    if (long_term_orders):
+        response['long_term']['count'] = long_term_orders
+        response['long_term']['link'] = f'/orders/?is_sent=false&min_date_planed={finish}'
+
     for weeks in range(4):
         week = []
         for days in range(7):
             day = start + timedelta(days = weeks * 7 + days)
-            data = {'day': day.day}
-            if day <= today:
+            data = {
+                'date': day.strftime("%d.%m.%Y"),
+                'day': day.day
+            }
+            if day < today:
                 data['count'] = 0
                 data['link'] = ''
             else:
                 data['count'] = len(Order.objects.filter(date_planed__exact=day, is_sent=False))
-                data['link'] = f'/orders/?max_date_planed={day}&min_date_planed={day}'
+                data['link'] = f'/orders/?is_sent=false&max_date_planed={day}&min_date_planed={day}'
             week.append(data)
         response['calendar'].append(week)
             

@@ -137,18 +137,18 @@ def clients_list(request):
 def orders_count(request):
     json = {}
 
-    orders_today = Order.objects.filter(date_planed__exact=datetime.date.today())
-    orders_tomorrow = Order.objects.filter(date_planed__exact=datetime.date.today() + datetime.timedelta(days=1))
-    orders_aftertomorrow = Order.objects.filter(date_planed__exact=datetime.date.today() + datetime.timedelta(days=2))
-    orders_unsent = Order.objects.filter(is_sent__exact=False)
-    orders_forgotten = orders_unsent.filter(date_planed__lt=datetime.date.today())
     orders_all = Order.objects.all()
+    orders_unsent = Order.objects.filter(is_sent__exact=False)
+    orders_today = orders_unsent.filter(date_planed__exact=datetime.date.today())
+    orders_tomorrow = orders_unsent.filter(date_planed__exact=datetime.date.today() + datetime.timedelta(days=1))
+    orders_aftertomorrow = orders_unsent.filter(date_planed__exact=datetime.date.today() + datetime.timedelta(days=2))
+    orders_forgotten = orders_unsent.filter(date_planed__lt=datetime.date.today())
         
-    json['orders_today'] = len(orders_today)
-    json['orders_tomorrow'] = len(orders_tomorrow)
-    json['orders_aftertomorrow'] = len(orders_aftertomorrow)
-    json['orders_unsent'] = len(orders_unsent)
-    json['orders_forgotten'] = len(orders_forgotten)
-    json['orders_all'] = len(orders_all)
+    json['orders_today'] = orders_today.count()
+    json['orders_tomorrow'] = orders_tomorrow.count()
+    json['orders_aftertomorrow'] = orders_aftertomorrow.count()
+    json['orders_unsent'] = orders_unsent.count()
+    json['orders_forgotten'] = orders_forgotten.count()
+    json['orders_all'] = orders_all.count()
 
     return JsonResponse(json)
