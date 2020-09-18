@@ -1,14 +1,6 @@
 'use strict';
       
 
-const   orders_pagination_bar = document.getElementById('pagination_bar'),
-        orders_pagination_bar_li_prev = document.getElementById('li_prev'),
-        orders_pagination_bar_li_next = document.getElementById('li_next'),
-        orders_pagination_bar_btn_prev = document.getElementById('btn_prev'),
-        orders_pagination_bar_btn_next = document.getElementById('btn_next'),
-        orders_pagination_bar_text_field = document.getElementById('pagination_text_field');
-
-
 getData(calendar_api_pathname)
     .then(data => {
         rebuildOrders(data);

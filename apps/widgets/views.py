@@ -40,6 +40,7 @@ def calendar(request):
         for days in range(7):
             day = start + timedelta(days = weeks * 7 + days)
             data = {
+                'isodate' : day,
                 'date': day.strftime("%d.%m.%Y"),
                 'day': day.day
             }
