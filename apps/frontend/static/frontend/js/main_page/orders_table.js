@@ -32,20 +32,22 @@ function rebuild_mainpage_table() {
 
 function rebuild_table(data) {
     table.innerHTML = '';
+    let i = 1;
     data.results.forEach(order => {
-        add_order_row(order);
+        add_order_row(order, i);
         order.orderitems.forEach(item => {
             add_item_row(item);
         });
+        i ++;
     });
 }
 
-function add_order_row(order) {
+function add_order_row(order, i) {
     const row = document.createElement('tr');
-    row.classList.add('unselectable');
+    row.classList.add('unselectable', 'thead-light');
     const content = document.createElement('th');
     content.colSpan = 2;
-    content.textContent = `${order.name} - ${order.city}`;
+    content.textContent = `#${i} ${order.instagram} - ${order.city}`;
     row.append(content);
     const btn = document.createElement('th');
     btn.colSpan = 2;

@@ -14,36 +14,6 @@ function rebuildOrders (data) {
     // reset table
     table_body.innerHTML = '';
 
-    if (data.missed.count) {
-        const row = document.createElement('tr');
-        row.classList.add('d-flex');
-        const td = document.createElement('td');
-        td.colSpan = 7;
-        td.classList.add('col', 'text-center');
-        const div = document.createElement('div');
-        div.classList.add('d-inline', 'align-top');
-        div.textContent = 'Просроченные';
-        const a = document.createElement('a');
-        a.classList.add('badge', 'badge-pill', 'badge-danger', 'd-inline', 'float-right', 'align-bottom');
-        a.textContent = data.missed.count;
-        a.href = data.missed.link;
-
-        // delete this block to make <a></a> directing to orders page instead reload main page
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.target.blur();
-            sessionStorage.setItem('calendar_link', data.missed.link);
-            sessionStorage.setItem('calendar_date', 'missed');
-            let event = new Event("calendar_trigger");
-            document.dispatchEvent(event);
-        });
-
-        td.append(div);
-        td.append(a);
-        row.append(td);
-        table_body.append(row);
-    }
-
     data.calendar.forEach (week => {
         const row = document.createElement('tr');
         row.classList.add('d-flex');
@@ -77,6 +47,36 @@ function rebuildOrders (data) {
 
         table_body.append(row);
     });
+
+    if (data.missed.count) {
+        const row = document.createElement('tr');
+        row.classList.add('d-flex');
+        const td = document.createElement('td');
+        td.colSpan = 7;
+        td.classList.add('col', 'text-center');
+        const div = document.createElement('div');
+        div.classList.add('d-inline', 'align-top');
+        div.textContent = 'Просроченные';
+        const a = document.createElement('a');
+        a.classList.add('badge', 'badge-pill', 'badge-danger', 'd-inline', 'float-right', 'align-bottom');
+        a.textContent = data.missed.count;
+        a.href = data.missed.link;
+
+        // delete this block to make <a></a> directing to orders page instead reload main page
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.target.blur();
+            sessionStorage.setItem('calendar_link', data.missed.link);
+            sessionStorage.setItem('calendar_date', 'missed');
+            let event = new Event("calendar_trigger");
+            document.dispatchEvent(event);
+        });
+
+        td.append(div);
+        td.append(a);
+        row.append(td);
+        table_body.append(row);
+    }
 
     if (data.long_term.count) {
         const row = document.createElement('tr');
