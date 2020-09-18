@@ -6,6 +6,7 @@
 
 <div class="container">
 	<div class="row">
+
 		<div class="col-md-4">
 			<div class="row">
 				<div class="col-md-7">
@@ -90,36 +91,60 @@
 			</form>
 		</div>
 
-		<div class="col collapse" id="div_items">
-			<div class="row">
-				<div class="col">
-					<h4>
-						Позиции заказа
-					</h4>
-				</div>
-				{% if perms.orders.add_orderitem %}
-				<div class="col">
-					<button type="button" id="minus" class="btn btn-outline-danger btn-sm float-right">&#9473;</button>
-					<button type="button" id="plus" class="btn btn-outline-success btn-sm float-right" data-toggle="modal" data-target="#addItemModal">&#9547;</button>
-				</div>
-				{% endif %}
+		<div class="col-md-8">
+
+			<div class="row collapse" id="calendar_div">
+				<div class="h4 text-left">Календарь заказов</div>
+				<table class="table table-bordered table-sm">
+					<thead>
+						<tr class="d-flex">
+							<th class="col text-left">Пн</th>
+							<th class="col text-left">Вт</th>
+							<th class="col text-left">Ср</th>
+							<th class="col text-left">Чт</th>
+							<th class="col text-left">Пт</th>
+							<th class="col text-left">Сб</th>
+							<th class="col text-left">Вс</th>
+						</tr>
+					</thead>
+					<tbody class="table_body" id="calendar_body">
+					</tbody>
+				</table>
 			</div>
 
-			<table class="table table-hover table-sm">
-				<thead>
-				  <tr>
-					<th scope="col">Категория</th>
-					<th scope="col">Товар</th>
-					<th scope="col">Описание</th>
-					<th scope="col">Шт.</th>
-					<th scope="col">Цена</th>
-					<th scope="col">Сумма</th>
-				  </tr>
-				</thead>
-				<tbody class="table_body">
-		  
-				</tbody>
-			</table>
+			<div class="collapse" id="div_items">
+				<div class="row">
+					<div class="col">
+						<h4>
+							Позиции заказа
+						</h4>
+					</div>
+					{% if perms.orders.add_orderitem %}
+					<div class="col">
+						<button type="button" id="minus" class="btn btn-outline-danger btn-sm float-right">&#9473;</button>
+						<button type="button" id="plus" class="btn btn-outline-success btn-sm float-right" data-toggle="modal" data-target="#addItemModal">&#9547;</button>
+					</div>
+					{% endif %}
+				</div>
+	
+				<div class="row">
+					<table class="table table-hover table-sm">
+						<thead>
+						  <tr>
+							<th scope="col">Категория</th>
+							<th scope="col">Товар</th>
+							<th scope="col">Описание</th>
+							<th scope="col">Шт.</th>
+							<th scope="col">Цена</th>
+							<th scope="col">Сумма</th>
+						  </tr>
+						</thead>
+						<tbody class="table_body" id="items_body">
+				  
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -209,4 +234,5 @@
 <script src="{% static 'frontend/js/order/ready_delete_items.js' %}"></script>
 <script src="{% static 'frontend/js/order/client_hint.js' %}"></script>
 <script src="{% static 'frontend/js/order/add_item.js' %}"></script>
+<script src="{% static 'frontend/js/order/calendar.js' %}"></script>
 {% endblock %}

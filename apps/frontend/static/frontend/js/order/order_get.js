@@ -76,7 +76,7 @@ function rebuildItems (data) {
                 <td>${amount * price}</td>
             </tr>
         `;
-        document.querySelector('.table_body').append(row);
+        document.getElementById('items_body').append(row);
     });
 
     const row = document.createElement('tr');
@@ -90,7 +90,7 @@ function rebuildItems (data) {
             <th>${sum}</th>
         </tr>
     `;
-    document.querySelector('.table_body').append(row);
+    document.getElementById('items_body').append(row);
 
     let event = new Event("items_loaded");
     document.dispatchEvent(event); // trigger for addEventListeners on order items

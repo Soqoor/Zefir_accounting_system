@@ -15,3 +15,9 @@ if (advanced_user == 'true') {
 novice_user.addEventListener('change', (e) => {
     localStorage.setItem('advanced_user', !novice_user.checked);
 });
+
+
+const btn_new_order = document.getElementById('btn_new_order');
+btn_new_order.addEventListener('click', () => {
+    window.open('/orders/0/', '_parent');
+});
