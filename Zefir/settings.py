@@ -105,6 +105,11 @@ DATABASES = {
     }
 } # Changed in local settings
 # For cyrillic case insensitive search support:
+
+# mysql> 
+# CREATE DATABASE 'someapp' DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+
+# psql>
 # CREATE DATABASE name
 # WITH OWNER name
 # ENCODING 'UTF8'
