@@ -20,6 +20,7 @@ function rebuild_mainpage_table() {
     }
 
     let calendar_link = sessionStorage.getItem('calendar_link');
+    if (!calendar_link) calendar_link = `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`;
     calendar_link = '/api' + calendar_link;
     getData(calendar_link)
     .then(data => {

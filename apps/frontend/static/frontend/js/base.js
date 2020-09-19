@@ -89,5 +89,5 @@ const home_btn = document.getElementById('home_btn');
 
 home_btn.addEventListener('click', e => {
     sessionStorage.removeItem('calendar_date');
-    sessionStorage.setItem('calendar_link', `/orders/?is_sent=false&max_date_planed=${isoDateFromToday(0)}&min_date_planed=${isoDateFromToday(0)}`);
+    sessionStorage.removeItem('calendar_link');
 });
