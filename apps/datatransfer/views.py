@@ -5,6 +5,8 @@ from ..catalog.models import Catalog
 from ..products.models import Product
 from ..orders.models import Order, OrderItem
 from ..expenses.models import Expenses, ExpensesCategory
+from .location_addition import files_location_addition
+
 
 # testing tool. Making changes in DB to have good data to test all features in UI
 @login_required
@@ -66,7 +68,7 @@ def data_load(request):
     return JsonResponse(response)
 
 def load_categories():
-    file = open('apps/datatransfer/data_files/category.tsv', encoding = 'utf-8', mode = 'r')
+    file = open(files_location_addition + 'apps/datatransfer/data_files/category.tsv', encoding = 'utf-8', mode = 'r')
     for line in file:
         lst = line.rstrip().split('\t')
         if lst[0] == 'skip':
@@ -79,7 +81,7 @@ def load_categories():
     return
 
 def load_products():
-    file = open('apps/datatransfer/data_files/products.tsv', encoding = 'utf-8', mode = 'r')
+    file = open(files_location_addition + 'apps/datatransfer/data_files/products.tsv', encoding = 'utf-8', mode = 'r')
     for line in file:
         lst = line.rstrip().split('\t')
         if lst[0] == 'skip':
@@ -94,7 +96,7 @@ def load_products():
     return
 
 def load_orders():
-    file = open('apps/datatransfer/data_files/orders.tsv', encoding = 'utf-8', mode = 'r')
+    file = open(files_location_addition + 'apps/datatransfer/data_files/orders.tsv', encoding = 'utf-8', mode = 'r')
     for line in file:
         lst = line.rstrip().split('\t')
         if lst[0] == 'skip':
@@ -118,7 +120,7 @@ def load_orders():
     return
 
 def load_orderitems():
-    file = open('apps/datatransfer/data_files/orderitems.tsv', encoding = 'utf-8', mode = 'r')
+    file = open(files_location_addition + 'apps/datatransfer/data_files/orderitems.tsv', encoding = 'utf-8', mode = 'r')
     for line in file:
         lst = line.rstrip().split('\t')
         if lst[0] == 'skip':
@@ -136,7 +138,7 @@ def load_orderitems():
     return
 
 def load_expensescategory():
-    file = open('apps/datatransfer/data_files/expensescategory.tsv', encoding = 'utf-8', mode = 'r')
+    file = open(files_location_addition + 'apps/datatransfer/data_files/expensescategory.tsv', encoding = 'utf-8', mode = 'r')
     for line in file:
         lst = line.rstrip().split('\t')
         if lst[0] == 'skip':
@@ -149,7 +151,7 @@ def load_expensescategory():
     return
 
 def load_expenses():
-    file = open('apps/datatransfer/data_files/expenses.tsv', encoding = 'utf-8', mode = 'r')
+    file = open(files_location_addition + 'apps/datatransfer/data_files/expenses.tsv', encoding = 'utf-8', mode = 'r')
     for line in file:
         lst = line.rstrip().split('\t')
         if lst[0] == 'skip':
