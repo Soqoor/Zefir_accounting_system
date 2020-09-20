@@ -8,7 +8,7 @@ class Order(models.Model):
     date_planed = models.DateField()  # planned date of sending the order
     date_deadline = models.DateField(blank=True, null=True)  # customer deadline
     instagram = models.CharField(max_length=30)  # client instagram id
-    phone = models.IntegerField(blank=True, null=True)
+    phone = models.BigIntegerField(blank=True, null=True)
     name = models.CharField(max_length=30, blank=True)
     city = models.CharField(max_length=30, blank=True)
     np_department = models.IntegerField(blank=True, null=True)  # NovaPoshta department number
